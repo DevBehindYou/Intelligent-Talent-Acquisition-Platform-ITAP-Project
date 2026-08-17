@@ -8,6 +8,7 @@
     "dev": "nodemon server.js",
     "start": "node server.js",
     "worker": "node src/queues/worker.js",
+    "start:free": "node src/queues/worker.js & node server.js",
     "lint": "eslint src server.js tests --ext js",
     "test": "vitest run"
   },
