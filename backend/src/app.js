@@ -23,6 +23,10 @@ import adminRoutes from "./routes/admin.routes.js";
 export function createApp() {
   const app = express();
 
+  // Trust the reverse proxy (Render) so rate limiting applies to the real client IP,
+  // not the load balancer's IP. Without this, the rate limiter instantly triggers 429s.
+  app.set("trust proxy", 1);
+
   app.use(helmet());
   app.use(cors({ origin: env.clientOrigin, credentials: true }));
   app.use(express.json({ limit: "2mb" }));
