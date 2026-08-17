@@ -4,7 +4,7 @@ import { env } from "../config/env.js";
 const COOKIE_OPTS_BASE = {
   httpOnly: true,
   secure: env.nodeEnv === "production",
-  sameSite: "strict",
+  sameSite: env.nodeEnv === "production" ? "none" : "strict",
 };
 
 // Express issues and owns this cookie itself, embedding exactly the claims the API needs
