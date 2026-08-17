@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Talent Pools - ITAP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;family=Space+Grotesk:wght@500;600&amp;family=IBM+Plex+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-fixed-variant": "#614000",
+                      "inverse-primary": "#9fccee",
+                      "primary-container": "#1d4e6b",
+                      "on-surface": "#0e1d2a",
+                      "surface-dim": "#cddbef",
+                      "inverse-on-surface": "#e9f1ff",
+                      "secondary-fixed-dim": "#f8bc5e",
+                      "tertiary": "#4b2c00",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container-low": "#eef4ff",
+                      "surface-container": "#e4efff",
+                      "on-surface-variant": "#41474d",
+                      "on-primary": "#ffffff",
+                      "primary-fixed-dim": "#9fccee",
+                      "on-error-container": "#93000a",
+                      "on-tertiary": "#ffffff",
+                      "on-primary-fixed-variant": "#194b68",
+                      "on-secondary-fixed": "#291800",
+                      "primary": "#003751",
+                      "secondary-fixed": "#ffddb0",
+                      "secondary-container": "#fec163",
+                      "surface-container-highest": "#d5e4f7",
+                      "primary-fixed": "#c8e6ff",
+                      "on-tertiary-fixed": "#2a1700",
+                      "on-tertiary-fixed-variant": "#633f0c",
+                      "surface-variant": "#d5e4f7",
+                      "surface-tint": "#356381",
+                      "error-container": "#ffdad6",
+                      "on-primary-container": "#92bfe0",
+                      "tertiary-fixed-dim": "#f1bd7f",
+                      "surface": "#f8f9ff",
+                      "error": "#ba1a1a",
+                      "secondary": "#805600",
+                      "tertiary-container": "#66420f",
+                      "surface-container-high": "#dbe9fd",
+                      "on-secondary": "#ffffff",
+                      "background": "#f8f9ff",
+                      "on-primary-fixed": "#001e2f",
+                      "surface-bright": "#f8f9ff",
+                      "outline": "#72787e",
+                      "on-tertiary-container": "#e3b073",
+                      "on-error": "#ffffff",
+                      "tertiary-fixed": "#ffddb8",
+                      "inverse-surface": "#243240",
+                      "on-secondary-container": "#764e00",
+                      "on-background": "#0e1d2a",
+                      "outline-variant": "#c1c7ce"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "md": "16px",
+                      "gutter": "16px",
+                      "sm": "8px",
+                      "xl": "32px",
+                      "margin-mobile": "16px",
+                      "base": "4px",
+                      "xs": "4px",
+                      "margin-desktop": "32px",
+                      "lg": "24px"
+              },
+              "fontFamily": {
+                      "data-mono": [
+                              "IBM Plex Mono"
+                      ],
+                      "label-caps": [
+                              "Inter"
+                      ],
+                      "display-sm": [
+                              "Space Grotesk"
+                      ],
+                      "display-md": [
+                              "Space Grotesk"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "display-lg": [
+                              "Space Grotesk"
+                      ],
+                      "body-sm": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "data-mono": [
+                              "13px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "label-caps": [
+                              "11px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "display-sm": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "display-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "18px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body { background-color: #f5f6f8; color: #0e1d2a; margin: 0; padding: 0; min-height: 100vh; display: flex; flex-direction: column; }
+        .hairline-border { border: 1px solid rgba(91, 107, 124, 0.2); }
+        .level-1 { background-color: #ffffff; border: 1px solid rgba(91, 107, 124, 0.2); }
+        .match-dial-bg { stroke: #dbe9fd; stroke-width: 8; fill: none; stroke-linecap: round; }
+        .match-dial-fill { stroke: #f8bc5e; stroke-width: 8; fill: none; stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: 22; /* 78% */ transition: stroke-dashoffset 1s ease-out; }
+        .brass-accent-left { border-left: 3px solid #f8bc5e; }
+        .bg-brass-light { background-color: rgba(248, 188, 94, 0.1); }
+    </style>
+</head>
+<body class="bg-background">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-40 flex justify-between items-center w-full px-margin-desktop h-16 bg-surface dark:bg-surface-container-low border-b border-outline-variant/20">
+<div class="flex items-center gap-md">
+<!-- Brand Logo -->
+<div class="font-display-md text-display-md font-bold text-primary dark:text-primary-fixed">ITAP</div>
+<!-- Global Nav Links (Web) -->
+<nav class="hidden md:flex gap-md ml-xl h-full items-center">
+<a class="h-full flex items-center px-sm text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-high transition-colors" href="#">Search</a>
+<a class="h-full flex items-center px-sm text-primary border-b-2 border-primary font-body-md text-body-md" href="#">Talent Pools</a>
+<a class="h-full flex items-center px-sm text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-high transition-colors" href="#">Projects</a>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<!-- Search Bar on Left of Actions -->
+<div class="relative hidden lg:block w-64">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant" style="font-size: 18px;">search</span>
+<input class="w-full pl-xl pr-sm h-[32px] bg-surface-container-highest border border-outline-variant/20 rounded-lg text-body-sm font-body-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" placeholder="Search across ITAP..." type="text"/>
+</div>
+<!-- Trailing Actions -->
+<button class="w-8 h-8 flex items-center justify-center rounded hover:bg-surface-container-high transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded hover:bg-surface-container-high transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<!-- Profile Avatar -->
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant/20 cursor-pointer ml-sm">
+<img alt="User avatar with initials" class="w-full h-full object-cover" data-alt="A small, professional headshot photo of a business user acting as a profile avatar icon. Soft lighting, neutral background, high resolution, minimalist corporate style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqBNwm4Mxal7bMZjuEdapwt2XAC6LI9W8-Vvj-FIdg6Nt2SfWK_8M91ICxJxU8rVzNXba5FT0PdDLwQTlXcENynrXKlbEGWiiGvVQDc-iHVDajR0Xir4fvHGuPlt4cVk7N7zIky4Y7a7DXSzJKaRpHRaCgb3a9naOKLz-vFwzbdGHq1Y85LvaA0NsuA11IZwvp8wdH0wTcwK5cxvDBrIaL89Q_ZYJAOglGjh3awrvfuFn47AIxtPL_Wg"/>
+</div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<!-- SideNavBar (Docked Left) -->
+<aside class="fixed left-0 top-0 h-screen flex flex-col items-center py-lg z-50 bg-primary dark:bg-on-background w-[72px]">
+<!-- Header/Logo area -->
+<div class="mb-xl flex flex-col items-center gap-xs mt-16"> <!-- mt-16 to clear TopNav visually if they overlap, though layout says SideNav is fixed left, TopNav might span full width. Adjusting for standard layout: TopNav usually sits next to SideNav or above. Let's assume TopNav spans full width and SideNav sits below it, or TopNav is sticky and SideNav is fixed full height. If SideNav is fixed full height, we need padding top. -->
+<div class="w-10 h-10 bg-primary-container rounded flex items-center justify-center mb-sm">
+<span class="font-display-sm text-display-sm text-primary-fixed">IT</span>
+</div>
+</div>
+<!-- CTA -->
+<button class="mb-xl w-10 h-10 bg-secondary-fixed text-on-secondary-fixed rounded flex items-center justify-center hover:opacity-90 transition-opacity" title="New Search">
+<span class="material-symbols-outlined" style="font-size: 20px;">add</span>
+</button>
+<!-- Main Tabs -->
+<nav class="flex-1 flex flex-col gap-sm w-full px-sm">
+<a class="flex flex-col items-center justify-center py-sm gap-xs text-primary-fixed-dim hover:bg-primary-fixed-variant/20 transition-all duration-200 ease-in-out rounded-lg group" href="#" title="Dashboard">
+<span class="material-symbols-outlined group-hover:text-primary-fixed transition-colors">dashboard</span>
+<span class="font-label-caps text-label-caps hidden">DASHBOARD</span>
+</a>
+<a class="flex flex-col items-center justify-center py-sm gap-xs bg-primary-container text-on-primary-container rounded-lg transition-all duration-200 ease-in-out" href="#" title="Candidates">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">groups</span>
+<span class="font-label-caps text-label-caps hidden">CANDIDATES</span>
+</a>
+<a class="flex flex-col items-center justify-center py-sm gap-xs text-primary-fixed-dim hover:bg-primary-fixed-variant/20 transition-all duration-200 ease-in-out rounded-lg group" href="#" title="Pipeline">
+<span class="material-symbols-outlined group-hover:text-primary-fixed transition-colors">account_tree</span>
+<span class="font-label-caps text-label-caps hidden">PIPELINE</span>
+</a>
+<a class="flex flex-col items-center justify-center py-sm gap-xs text-primary-fixed-dim hover:bg-primary-fixed-variant/20 transition-all duration-200 ease-in-out rounded-lg group" href="#" title="Analytics">
+<span class="material-symbols-outlined group-hover:text-primary-fixed transition-colors">analytics</span>
+<span class="font-label-caps text-label-caps hidden">ANALYTICS</span>
+</a>
+<a class="flex flex-col items-center justify-center py-sm gap-xs text-primary-fixed-dim hover:bg-primary-fixed-variant/20 transition-all duration-200 ease-in-out rounded-lg group" href="#" title="Reports">
+<span class="material-symbols-outlined group-hover:text-primary-fixed transition-colors">description</span>
+<span class="font-label-caps text-label-caps hidden">REPORTS</span>
+</a>
+</nav>
+<!-- Footer Tabs -->
+<div class="mt-auto flex flex-col gap-sm w-full px-sm pb-md">
+<a class="flex flex-col items-center justify-center py-sm gap-xs text-primary-fixed-dim hover:bg-primary-fixed-variant/20 transition-all duration-200 ease-in-out rounded-lg group" href="#" title="Help">
+<span class="material-symbols-outlined group-hover:text-primary-fixed transition-colors">help</span>
+</a>
+<a class="flex flex-col items-center justify-center py-sm gap-xs text-primary-fixed-dim hover:bg-primary-fixed-variant/20 transition-all duration-200 ease-in-out rounded-lg group" href="#" title="Logout">
+<span class="material-symbols-outlined group-hover:text-primary-fixed transition-colors">logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-[72px] p-margin-desktop bg-background overflow-y-auto">
+<!-- Page Header -->
+<div class="flex justify-between items-end mb-xl">
+<div>
+<h1 class="font-display-lg text-display-lg text-on-surface mb-xs">Talent Pools</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Manage and monitor curated candidate segments.</p>
+</div>
+<button class="h-10 px-md bg-primary text-on-primary font-body-md text-body-md font-medium rounded flex items-center gap-sm hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined" style="font-size: 18px;">add</span>
+                    Create New Pool
+                </button>
+</div>
+<!-- Bento Grid / Cards Layout -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-gutter">
+<!-- Card 1 -->
+<div class="level-1 rounded-lg p-md flex flex-col relative brass-accent-left shadow-sm">
+<div class="flex justify-between items-start mb-md">
+<div>
+<h2 class="font-display-sm text-display-sm text-on-surface mb-xs">Senior Backend Engineers</h2>
+<div class="flex items-center gap-sm font-data-mono text-data-mono text-on-surface-variant">
+<span class="material-symbols-outlined" style="font-size: 14px;">groups</span>
+                                1,240 Candidates
+                            </div>
+</div>
+<div class="px-2 py-1 bg-surface-container-highest rounded-sm font-label-caps text-label-caps text-on-surface flex items-center gap-xs">
+<div class="w-1.5 h-1.5 rounded-full bg-secondary-container"></div>
+                            ACTIVE SOURCING
+                        </div>
+</div>
+<div class="flex gap-md mb-md">
+<!-- AI Health Dial -->
+<div class="w-16 h-16 relative flex-shrink-0">
+<svg class="w-full h-full" viewbox="0 0 36 36">
+<path class="match-dial-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" stroke-dasharray="100, 100"></path>
+<path class="match-dial-fill" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" stroke-dasharray="78, 100"></path>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center flex-col">
+<span class="font-data-mono text-[11px] font-bold text-on-surface leading-none mt-1">78</span>
+</div>
+</div>
+<div class="flex-1 flex flex-col justify-center">
+<div class="bg-brass-light p-sm rounded-sm font-body-sm text-body-sm text-on-surface-variant border border-[#f8bc5e]/20">
+<strong class="text-secondary">AI Summary:</strong> High readiness: 5 candidates ready for offer stage. Velocity is positive.
+                            </div>
+</div>
+</div>
+<div class="mt-auto pt-sm border-t border-outline-variant/20 flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Top Matches</span>
+<div class="flex -space-x-2">
+<img alt="Candidate 1" class="w-6 h-6 rounded-full border border-white" data-alt="A tiny, high-quality professional headshot of a software engineer, used as a list avatar. Bright lighting, clean background, modern corporate style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyXUkVYDPviAIAVvKBOtsny9935tJInljPH1xDtK1YaI54PWygcNUbF-z5zgYK0s2qItDMG5H1Gx2L_unFLH7z5TnVCUSSmdM3OdxxiPYloNrZrsJkhCsb1nLjKVquURPVme9yZ74xRJWnvSfEQxbfxUi62nToGPSVMTYsgEYDYj4nbYP1cHRcn7TMV76lMEWGbqQKBMVoLfG50DUIBi0Zw_ciQqRIurx18GO08cRbqY5eOzjWMZT2mg"/>
+<img alt="Candidate 2" class="w-6 h-6 rounded-full border border-white" data-alt="A tiny, high-quality professional headshot of a software engineer, used as a list avatar. Bright lighting, clean background, modern corporate style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqbtUF08V9oO9SQ6Tr8T_BZ55qapdBHfu6oBCqfqD8KondHajPupkpkvjADmcaoRJQjsxiOzleQwK5FqxwFOJlrFgJuBAdYERryJklEP17ml0t1C5TyObcijlR8P6cErMQ0ioGFmqr_P2_7PubdpY-Y_08py4BSVdAQ6r0dCYIykzorwOwUynQo_YWkqrDJvo-5MyWFCxUOhx7nzKuge8kVcGXb48AWVALIicWdv5QW6YLCwrblF6mnA"/>
+<img alt="Candidate 3" class="w-6 h-6 rounded-full border border-white" data-alt="A tiny, high-quality professional headshot of a software engineer, used as a list avatar. Bright lighting, clean background, modern corporate style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvlPa0uROz_RQWqRGC-lCBm5Qru3KK32PT6XDQWlo9dhFH0hh54Pvas9WmyWUUNHL6cMpPh_fMpU6-KSo8wKqWAD_jCZv5YdvLHprhiyMii5aRySHLzHF7J9We6_kIyMEFUdiEEsrXkczScGcf5cgtqcyXAUNzvX5jRZBrs3-s0E5YPhRTt2pp5JysHoMm8840NeY3p3yPkPv5l5bK8m8fiRvNZj32FDWoMEVLVVQ59F9wdhMn_vPuvw"/>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="level-1 rounded-lg p-md flex flex-col relative shadow-sm">
+<div class="flex justify-between items-start mb-md">
+<div>
+<h2 class="font-display-sm text-display-sm text-on-surface mb-xs">Design Leaders (UX/UI)</h2>
+<div class="flex items-center gap-sm font-data-mono text-data-mono text-on-surface-variant">
+<span class="material-symbols-outlined" style="font-size: 14px;">groups</span>
+                                485 Candidates
+                            </div>
+</div>
+<div class="px-2 py-1 bg-surface-container rounded-sm font-label-caps text-label-caps text-on-surface-variant flex items-center gap-xs">
+                            PASSIVE / GROWING
+                        </div>
+</div>
+<div class="flex gap-md mb-md">
+<!-- AI Health Dial -->
+<div class="w-16 h-16 relative flex-shrink-0">
+<svg class="w-full h-full" viewbox="0 0 36 36">
+<path class="match-dial-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" stroke-dasharray="100, 100"></path>
+<path class="match-dial-fill" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" style="stroke-dasharray: 45, 100; stroke: #9fccee;"></path>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center flex-col">
+<span class="font-data-mono text-[11px] font-bold text-on-surface leading-none mt-1">45</span>
+</div>
+</div>
+<div class="flex-1 flex flex-col justify-center">
+<div class="p-sm rounded-sm font-body-sm text-body-sm text-on-surface-variant bg-surface-container-low border border-outline-variant/10">
+                                Pool needs fresh data. Last meaningful engagement was 14 days ago. Consider automated reach-out.
+                            </div>
+</div>
+</div>
+<div class="mt-auto pt-sm border-t border-outline-variant/20 flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Top Matches</span>
+<div class="flex -space-x-2">
+<img alt="Candidate 1" class="w-6 h-6 rounded-full border border-white" data-alt="A tiny, high-quality professional headshot of a designer, used as a list avatar. Bright lighting, clean background, modern corporate style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjlxlSVbbxO044dn3wpMJCWjbeM6Kyyb8nxuM2Tjge-kdwIQ9pu4dco5tnlXXAothYbY9dtRouGLJzUW6yUEWuGI0sjEoCmN8bkS65iLOfpPyk_GlCWlbuUpR6F7AUKwoEsGqntZdnpXhMJKzV9tDYVZiBAbfH3OwKNqjTx8G330Fw6NR4TK-QLcxlW2RtFWooHARGiKXPpGtbSuSNssq9WYJUe9B5dX6Dp8czasxAvHeej_g-Ze6Vtw"/>
+<img alt="Candidate 2" class="w-6 h-6 rounded-full border border-white" data-alt="A tiny, high-quality professional headshot of a designer, used as a list avatar. Bright lighting, clean background, modern corporate style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDq8LT-pmO530-Xk1cqGjzpem_kw2d_rA_Mnb5804_AygqwfUvxXyPIwGbJfcj4lQSgqu36NDRi0eAgEqiKL4m5XO8l_T8rC20Xr8dFIe-uLyPjnXv_9nklE9VYojdoCviu5RhaRuYH2l0_Gao8h84Zkcj6rPE_UPiFsQ115fBn17Z-tMwKTzGwZ7qwLRiXasoehj6icPrT4sEisaDC-EERH0UCKgaNTFYFc0n9fSXXWsJ86mXeYNLj3g"/>
+<div class="w-6 h-6 rounded-full border border-white bg-surface-container-highest flex items-center justify-center font-data-mono text-[9px] text-on-surface-variant">+2</div>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="level-1 rounded-lg p-md flex flex-col relative brass-accent-left shadow-sm">
+<div class="flex justify-between items-start mb-md">
+<div>
+<h2 class="font-display-sm text-display-sm text-on-surface mb-xs">FinTech Product Managers</h2>
+<div class="flex items-center gap-sm font-data-mono text-data-mono text-on-surface-variant">
+<span class="material-symbols-outlined" style="font-size: 14px;">groups</span>
+                                892 Candidates
+                            </div>
+</div>
+<div class="px-2 py-1 bg-surface-container-highest rounded-sm font-label-caps text-label-caps text-on-surface flex items-center gap-xs">
+<div class="w-1.5 h-1.5 rounded-full bg-secondary-container"></div>
+                            ACTIVE SOURCING
+                        </div>
+</div>
+<div class="flex gap-md mb-md">
+<!-- AI Health Dial -->
+<div class="w-16 h-16 relative flex-shrink-0">
+<svg class="w-full h-full" viewbox="0 0 36 36">
+<path class="match-dial-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" stroke-dasharray="100, 100"></path>
+<path class="match-dial-fill" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" style="stroke-dasharray: 88, 100;"></path>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center flex-col">
+<span class="font-data-mono text-[11px] font-bold text-on-surface leading-none mt-1">88</span>
+</div>
+</div>
+<div class="flex-1 flex flex-col justify-center">
+<div class="bg-brass-light p-sm rounded-sm font-body-sm text-body-sm text-on-surface-variant border border-[#f8bc5e]/20">
+<strong class="text-secondary">AI Summary:</strong> Exceptional talent density. 12 candidates highly receptive to contact based on recent market signals.
+                            </div>
+</div>
+</div>
+<div class="mt-auto pt-sm border-t border-outline-variant/20 flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Top Matches</span>
+<div class="flex -space-x-2">
+<img alt="Candidate 1" class="w-6 h-6 rounded-full border border-white" data-alt="A tiny, high-quality professional headshot of a product manager, used as a list avatar. Bright lighting, clean background, modern corporate style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsaBNEnCnfM3VtXBkjp7Jvda3ouSIwVnXjzucfDVOpoqeYWxpbhSEJcyPcXQtLCswHbLLNtZWxFTuzIgPktx_UvgAl4hHRVs5IaCxChHwuqgGWlmQxGwpPHAK1TSHbKkesDrTlwPKsC4G8FtkLftRjGizOo5V7HiNYUq7-KhxFDP2ADXeXNw3JlZBgXEVxhZ3JcWgkx0q77OI2ptA6WiXNOLGpC5hP1GVVbOP4JZqt4dCKC8DFbpArVQ"/>
+<img alt="Candidate 2" class="w-6 h-6 rounded-full border border-white" data-alt="A tiny, high-quality professional headshot of a product manager, used as a list avatar. Bright lighting, clean background, modern corporate style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8g88C4998sl1A7QEp2QbVvpNzS6ZcZPPJA8J5wvaaXD-2qnjk3XexfsbAXUc242NrxNTccOZARrpu1hvY3ZjCurJXFxbAXrJmD1_CCy67Iw_-KXxRHRj3xKSUHDEy9RAhHx3HuCpuBY60uMCtr0kg7kkLnOfuiTDGo2-txC4EE2E-drNdon8VNkt0mKIXxccYq8aVh0gsi8f6krIQ6DGejbKcpzaDKNjrG04vgQhuBO8yJgLuLK98OQ"/>
+<img alt="Candidate 3" class="w-6 h-6 rounded-full border border-white" data-alt="A tiny, high-quality professional headshot of a product manager, used as a list avatar. Bright lighting, clean background, modern corporate style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_KTye4Dbkb1rII8sg57HSr5pfdqBnGSIsNrsn7YEkNrv52wzwnrYcQKI9C--RPM1gwJAFq6fG0m-FGa4XFIhiKx41aH6kvdMFa1fkqVc1ri1cM_DymkObOlsSDm__CBegktxqh_u9kTpuYizWi4Z09brONAq5_6_18bqdNcwbGMjSrGVRg0bkoITU-AokErKEr1i3dHMU5lr3eK6Pz0QzLcQyDg580HqLeOp_snzFG7fyZjD0LBVCzw"/>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

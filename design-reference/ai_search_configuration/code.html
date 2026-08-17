@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Search &amp; Filter Configuration - ITAP</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&amp;family=Inter:wght@400;500;700&amp;family=Space+Grotesk:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary": "#805600",
+                    "on-tertiary": "#ffffff",
+                    "secondary-fixed": "#ffddb0",
+                    "on-surface-variant": "#41474d",
+                    "on-background": "#0e1d2a",
+                    "on-primary-container": "#92bfe0",
+                    "on-error-container": "#93000a",
+                    "background": "#f8f9ff",
+                    "surface": "#f8f9ff",
+                    "on-secondary-fixed": "#291800",
+                    "on-primary-fixed": "#001e2f",
+                    "surface-bright": "#f8f9ff",
+                    "surface-dim": "#cddbef",
+                    "tertiary-fixed": "#ffddb8",
+                    "surface-container-low": "#eef4ff",
+                    "inverse-primary": "#9fccee",
+                    "tertiary": "#4b2c00",
+                    "outline": "#72787e",
+                    "inverse-on-surface": "#e9f1ff",
+                    "surface-container-highest": "#d5e4f7",
+                    "on-tertiary-container": "#e3b073",
+                    "outline-variant": "#c1c7ce",
+                    "on-tertiary-fixed-variant": "#633f0c",
+                    "on-error": "#ffffff",
+                    "secondary-fixed-dim": "#f8bc5e",
+                    "on-surface": "#0e1d2a",
+                    "surface-container": "#e4efff",
+                    "inverse-surface": "#243240",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-container": "#1d4e6b",
+                    "primary-fixed": "#c8e6ff",
+                    "on-secondary-container": "#764e00",
+                    "tertiary-container": "#66420f",
+                    "primary": "#003751",
+                    "on-secondary-fixed-variant": "#614000",
+                    "on-primary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "secondary-container": "#fec163",
+                    "on-tertiary-fixed": "#2a1700",
+                    "on-primary-fixed-variant": "#194b68",
+                    "error": "#ba1a1a",
+                    "primary-fixed-dim": "#9fccee",
+                    "surface-container-high": "#dbe9fd",
+                    "surface-variant": "#d5e4f7",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed-dim": "#f1bd7f",
+                    "surface-tint": "#356381"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "xs": "4px",
+                    "margin-desktop": "32px",
+                    "base": "4px",
+                    "lg": "24px",
+                    "margin-mobile": "16px",
+                    "xl": "32px",
+                    "sm": "8px",
+                    "gutter": "16px",
+                    "md": "16px"
+            },
+            "fontFamily": {
+                    "data-mono": ["IBM Plex Mono"],
+                    "label-caps": ["Inter"],
+                    "display-sm": ["Space Grotesk"],
+                    "body-md": ["Inter"],
+                    "display-md": ["Space Grotesk"],
+                    "body-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "display-lg": ["Space Grotesk"]
+            },
+            "fontSize": {
+                    "data-mono": ["13px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "display-sm": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "display-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        /* Custom styles for high-end precision feel */
+        .hairline-b { border-bottom: 1px solid rgba(193, 199, 206, 0.2); }
+        .hairline-t { border-top: 1px solid rgba(193, 199, 206, 0.2); }
+        .hairline-l { border-left: 1px solid rgba(193, 199, 206, 0.2); }
+        
+        .dial-track {
+            background: conic-gradient(from 180deg at 50% 100%, var(--tw-colors-secondary-container) 0%, var(--tw-colors-secondary-container) calc(var(--value) * 1%), var(--tw-colors-outline-variant) calc(var(--value) * 1%), var(--tw-colors-outline-variant) 100%);
+        }
+        
+        /* Input range override for instrument feel */
+        input[type=range].instrument-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type=range].instrument-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 16px;
+            width: 8px;
+            border-radius: 2px;
+            background: var(--tw-colors-surface-container-lowest);
+            border: 1px solid var(--tw-colors-outline);
+            cursor: pointer;
+            margin-top: -6px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        input[type=range].instrument-slider::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: var(--tw-colors-outline-variant);
+            border-radius: 2px;
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md h-screen w-full flex overflow-hidden">
+<!-- SideNavBar (Shared Component) -->
+<nav class="fixed left-0 top-0 h-screen flex flex-col items-center py-lg z-50 bg-primary w-[72px] transition-all duration-200 ease-in-out border-r border-outline-variant/10">
+<!-- Brand Header -->
+<div class="flex flex-col items-center mb-8 gap-sm">
+<div class="w-10 h-10 rounded bg-primary-fixed flex items-center justify-center">
+<span class="font-display-sm text-display-sm font-bold text-primary">ITAP</span>
+</div>
+</div>
+<!-- CTA -->
+<button class="mb-8 w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center hover:bg-secondary-fixed-dim transition-colors" title="New Search">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+</button>
+<!-- Main Tabs -->
+<div class="flex flex-col gap-4 w-full px-2 flex-1">
+<a class="flex flex-col items-center justify-center w-full h-14 bg-primary-container text-on-primary-container rounded-lg" href="#" title="Dashboard">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-caps text-[9px]">DASHBOARD</span>
+</a>
+<a class="flex flex-col items-center justify-center w-full h-14 text-primary-fixed-dim hover:bg-primary-fixed-variant/20 rounded-lg transition-colors" href="#" title="Candidates">
+<span class="material-symbols-outlined mb-1">groups</span>
+<span class="font-label-caps text-[9px]">CANDIDATES</span>
+</a>
+<a class="flex flex-col items-center justify-center w-full h-14 text-primary-fixed-dim hover:bg-primary-fixed-variant/20 rounded-lg transition-colors" href="#" title="Pipeline">
+<span class="material-symbols-outlined mb-1">account_tree</span>
+<span class="font-label-caps text-[9px]">PIPELINE</span>
+</a>
+<a class="flex flex-col items-center justify-center w-full h-14 text-primary-fixed-dim hover:bg-primary-fixed-variant/20 rounded-lg transition-colors" href="#" title="Analytics">
+<span class="material-symbols-outlined mb-1">analytics</span>
+<span class="font-label-caps text-[9px]">ANALYTICS</span>
+</a>
+<a class="flex flex-col items-center justify-center w-full h-14 text-primary-fixed-dim hover:bg-primary-fixed-variant/20 rounded-lg transition-colors" href="#" title="Reports">
+<span class="material-symbols-outlined mb-1">description</span>
+<span class="font-label-caps text-[9px]">REPORTS</span>
+</a>
+</div>
+<!-- Footer Tabs -->
+<div class="flex flex-col gap-4 w-full px-2 mt-auto">
+<a class="flex flex-col items-center justify-center w-full h-14 text-primary-fixed-dim hover:bg-primary-fixed-variant/20 rounded-lg transition-colors" href="#" title="Help">
+<span class="material-symbols-outlined mb-1">help</span>
+</a>
+<a class="flex flex-col items-center justify-center w-full h-14 text-primary-fixed-dim hover:bg-primary-fixed-variant/20 rounded-lg transition-colors" href="#" title="Logout">
+<span class="material-symbols-outlined mb-1">logout</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-[72px] h-screen overflow-y-auto bg-background p-margin-desktop">
+<!-- Page Header -->
+<header class="mb-8 flex justify-between items-end">
+<div>
+<h1 class="font-display-lg text-display-lg text-on-background mb-2">AI Search Engine</h1>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">tune</span>
+                    Calibrate ranking weights and semantic thresholds.
+                </p>
+</div>
+<div class="flex gap-4">
+<button class="px-4 py-2 border border-outline-variant/30 text-on-surface bg-surface-container-lowest rounded hover:bg-surface-container-low transition-colors font-body-sm font-medium">Reset Defaults</button>
+<button class="px-4 py-2 bg-primary text-on-primary rounded hover:bg-primary/90 transition-colors font-body-sm font-medium">Save Profile</button>
+</div>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-gutter items-start">
+<!-- Left Column: Controls (Col Span 8) -->
+<div class="xl:col-span-8 flex flex-col gap-gutter">
+<!-- Natural Language Query Input -->
+<section class="bg-surface-container-lowest border border-outline-variant/20 rounded shadow-sm p-6 relative overflow-hidden group">
+<div class="absolute left-0 top-0 bottom-0 w-[3px] bg-secondary-container opacity-0 group-focus-within:opacity-100 transition-opacity"></div>
+<label class="font-label-caps text-label-caps text-on-surface-variant mb-4 block flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px]">psychology</span>
+                        SEMANTIC QUERY INPUT
+                    </label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-12 pr-4 py-4 bg-surface rounded border border-outline-variant/30 focus:border-primary focus:ring-0 text-on-background font-body-lg placeholder:text-outline/50 transition-colors outline-none" placeholder="e.g. Find senior backend engineers with extensive distributed systems experience in the fintech sector..." type="text"/>
+</div>
+<div class="flex gap-2 mt-4">
+<span class="px-2 py-1 bg-surface-container border border-outline-variant/20 rounded font-data-mono text-[11px] text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[12px] text-secondary-container">auto_awesome</span> AI Parsed</span>
+<span class="px-2 py-1 bg-surface-container border border-outline-variant/20 rounded font-data-mono text-[11px] text-on-surface-variant">Intent: Lead/Senior</span>
+<span class="px-2 py-1 bg-surface-container border border-outline-variant/20 rounded font-data-mono text-[11px] text-on-surface-variant">Domain: FinTech</span>
+</div>
+</section>
+<!-- Weighting Configuration -->
+<section class="bg-surface-container-lowest border border-outline-variant/20 rounded shadow-sm">
+<div class="p-6 hairline-b">
+<div class="flex justify-between items-center">
+<h2 class="font-display-sm text-display-sm text-on-background flex items-center gap-2">
+<span class="material-symbols-outlined">equalizer</span>
+                                Algorithm Weighting
+                            </h2>
+<span class="font-data-mono text-data-mono text-outline">v2.4.1 (Stable)</span>
+</div>
+<p class="font-body-sm text-on-surface-variant mt-1">Adjust the relative importance of specific candidate vectors.</p>
+</div>
+<div class="p-0">
+<!-- Slider 1 -->
+<div class="p-6 flex items-center gap-6 hairline-b hover:bg-surface-container-low/30 transition-colors">
+<div class="w-48 flex-shrink-0">
+<span class="font-label-caps text-label-caps text-on-surface block mb-1">TECHNICAL DEPTH</span>
+<span class="font-body-sm text-body-sm text-outline block">Hard skills &amp; tools match</span>
+</div>
+<div class="flex-1 relative flex items-center">
+<div class="absolute w-full h-[2px] bg-outline-variant/30 rounded"></div>
+<div class="absolute h-[2px] bg-secondary-container rounded" style="width: 85%;"></div>
+<input class="instrument-slider relative z-10 w-full" max="100" min="0" type="range" value="85"/>
+</div>
+<div class="w-16 text-right">
+<span class="font-data-mono text-[16px] text-on-background font-medium">85%</span>
+</div>
+</div>
+<!-- Slider 2 -->
+<div class="p-6 flex items-center gap-6 hairline-b hover:bg-surface-container-low/30 transition-colors">
+<div class="w-48 flex-shrink-0">
+<span class="font-label-caps text-label-caps text-on-surface block mb-1">EXPERIENCE LEVEL</span>
+<span class="font-body-sm text-body-sm text-outline block">Years &amp; seniority alignment</span>
+</div>
+<div class="flex-1 relative flex items-center">
+<div class="absolute w-full h-[2px] bg-outline-variant/30 rounded"></div>
+<div class="absolute h-[2px] bg-secondary-container rounded" style="width: 60%;"></div>
+<input class="instrument-slider relative z-10 w-full" max="100" min="0" type="range" value="60"/>
+</div>
+<div class="w-16 text-right">
+<span class="font-data-mono text-[16px] text-on-background font-medium">60%</span>
+</div>
+</div>
+<!-- Slider 3 -->
+<div class="p-6 flex items-center gap-6 hairline-b hover:bg-surface-container-low/30 transition-colors">
+<div class="w-48 flex-shrink-0">
+<span class="font-label-caps text-label-caps text-on-surface block mb-1">SKILL RECENCY</span>
+<span class="font-body-sm text-body-sm text-outline block">Timeline of core competencies</span>
+</div>
+<div class="flex-1 relative flex items-center">
+<div class="absolute w-full h-[2px] bg-outline-variant/30 rounded"></div>
+<div class="absolute h-[2px] bg-secondary-container rounded" style="width: 40%;"></div>
+<input class="instrument-slider relative z-10 w-full" max="100" min="0" type="range" value="40"/>
+</div>
+<div class="w-16 text-right">
+<span class="font-data-mono text-[16px] text-on-background font-medium">40%</span>
+</div>
+</div>
+<!-- Slider 4 -->
+<div class="p-6 flex items-center gap-6 hairline-b hover:bg-surface-container-low/30 transition-colors">
+<div class="w-48 flex-shrink-0">
+<span class="font-label-caps text-label-caps text-on-surface block mb-1">DOMAIN EXPERTISE</span>
+<span class="font-body-sm text-body-sm text-outline block">Industry &amp; sector crossover</span>
+</div>
+<div class="flex-1 relative flex items-center">
+<div class="absolute w-full h-[2px] bg-outline-variant/30 rounded"></div>
+<div class="absolute h-[2px] bg-secondary-container rounded" style="width: 75%;"></div>
+<input class="instrument-slider relative z-10 w-full" max="100" min="0" type="range" value="75"/>
+</div>
+<div class="w-16 text-right">
+<span class="font-data-mono text-[16px] text-on-background font-medium">75%</span>
+</div>
+</div>
+<!-- Slider 5 -->
+<div class="p-6 flex items-center gap-6 hover:bg-surface-container-low/30 transition-colors">
+<div class="w-48 flex-shrink-0">
+<span class="font-label-caps text-label-caps text-on-surface block mb-1">CULTURAL FIT (AI)</span>
+<span class="font-body-sm text-body-sm text-outline block flex items-center gap-1"><span class="material-symbols-outlined text-[12px] text-secondary-container">auto_awesome</span> Implicit trait match</span>
+</div>
+<div class="flex-1 relative flex items-center">
+<div class="absolute w-full h-[2px] bg-outline-variant/30 rounded"></div>
+<div class="absolute h-[2px] bg-secondary-container rounded" style="width: 25%;"></div>
+<input class="instrument-slider relative z-10 w-full" max="100" min="0" type="range" value="25"/>
+</div>
+<div class="w-16 text-right">
+<span class="font-data-mono text-[16px] text-on-background font-medium">25%</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Live Preview (Col Span 4) -->
+<div class="xl:col-span-4 flex flex-col gap-gutter h-full">
+<section class="bg-surface-container-lowest border border-outline-variant/20 rounded shadow-sm flex flex-col h-full sticky top-margin-desktop">
+<div class="p-4 hairline-b bg-surface-container/50 flex justify-between items-center rounded-t">
+<h3 class="font-display-sm text-[16px] text-on-background flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+                            Live Impact Preview
+                        </h3>
+<span class="px-2 py-1 bg-surface-container-highest rounded text-[10px] font-label-caps text-on-surface">TOP 3 MATCHES</span>
+</div>
+<div class="flex-1 overflow-y-auto">
+<!-- Candidate 1 -->
+<div class="p-4 hairline-b hover:bg-surface-container-low transition-colors flex gap-4 items-start relative">
+<div class="absolute left-0 top-0 bottom-0 w-[3px] bg-secondary-container opacity-80"></div>
+<div class="w-10 h-10 rounded bg-surface-dim overflow-hidden flex-shrink-0">
+<img alt="Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAyUW-cuC2z-nVX6yzHFsZrFvOQ9g8blAaHpSHXt-N-GDdbTL-kdzpV5PbRdTPI9O6z9KXUuQfiIzLGsFDxjnzHQ-watWeUtfqn5OTByQKMDPog103dMW0LxljmNcAA4vG7LalGXQ754c7dW6-RlIZ_wwjHa0kcSi4oAPgVm83QRvSxj_PI_8hAYWFAyXVktnHcV0ofi2-wFuQqBgQg21G6mW4CUCB4IAI7yv_XPpcE-bg6IYMri1zGg"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline mb-1">
+<h4 class="font-body-md font-medium text-on-background truncate">Marcus Thorne</h4>
+<span class="font-data-mono text-secondary text-[12px] font-bold">94%</span>
+</div>
+<p class="font-body-sm text-on-surface-variant truncate mb-2">Staff Engineer at Vertex Inc.</p>
+<div class="flex flex-wrap gap-1">
+<span class="px-1.5 py-0.5 border border-outline-variant/40 rounded text-[10px] font-data-mono text-outline">Dist Systems</span>
+<span class="px-1.5 py-0.5 border border-outline-variant/40 rounded text-[10px] font-data-mono text-outline">FinTech</span>
+</div>
+</div>
+</div>
+<!-- Candidate 2 -->
+<div class="p-4 hairline-b hover:bg-surface-container-low transition-colors flex gap-4 items-start relative">
+<div class="w-10 h-10 rounded bg-surface-dim overflow-hidden flex-shrink-0">
+<img alt="Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA45QnwcufSwGN4UWWpZVekPsrZrdXDr5TeqSFyjmM-wL4238iCAJOGQUxzRvocsirW2uFxrKYnbgg__iILvSMtKBR1dYNEm1dy43kRM8e8Xh-G7R17mD4MnSyJzPOesBXPp90JdsXYNZWQV5VFRyg9ZgaAKXIGZr8ppgby04CeowI1rbsV6nc9YCIr2IqA3Ez5Zalns90fbcqv8q5_c1vf2WsKaj-s2JoLZuBckeDjOYirLUBSpf_26g"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline mb-1">
+<h4 class="font-body-md font-medium text-on-background truncate">Elena Rostova</h4>
+<span class="font-data-mono text-primary-container text-[12px] font-bold">88%</span>
+</div>
+<p class="font-body-sm text-on-surface-variant truncate mb-2">Senior Backend Eng., Flow</p>
+<div class="flex flex-wrap gap-1">
+<span class="px-1.5 py-0.5 border border-outline-variant/40 rounded text-[10px] font-data-mono text-outline">Go</span>
+<span class="px-1.5 py-0.5 border border-outline-variant/40 rounded text-[10px] font-data-mono text-outline">AWS</span>
+</div>
+</div>
+</div>
+<!-- Candidate 3 -->
+<div class="p-4 hover:bg-surface-container-low transition-colors flex gap-4 items-start relative">
+<div class="w-10 h-10 rounded bg-surface-dim overflow-hidden flex-shrink-0">
+<img alt="Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkCdj74XAS2ijuk__re1gl6UZpS5kEwg3A31mlr3SqftTSUUFq1U4D0tDaRu11u0VmwmcQzD8n_NqggiuPeTBx7fetQjcpqxrpQKcZxvWGGT57Moqz3BYVkMc_QaMQs-NfyS6o0vbjvjGBfEs2q_d3o1V1A86oIRDyZ6ilrVne8GQ7gcB5QlGwwnhDiSldZuoNY5QPSvkdtKzJr6E2GVecNXEO7NqD5XnLoptq9guqUaI_ivVlw-22Gg"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline mb-1">
+<h4 class="font-body-md font-medium text-on-background truncate">David Chen</h4>
+<span class="font-data-mono text-primary-container text-[12px] font-bold">81%</span>
+</div>
+<p class="font-body-sm text-on-surface-variant truncate mb-2">Lead Developer, FinCore</p>
+<div class="flex flex-wrap gap-1">
+<span class="px-1.5 py-0.5 border border-outline-variant/40 rounded text-[10px] font-data-mono text-outline">Java</span>
+<span class="px-1.5 py-0.5 border border-outline-variant/40 rounded text-[10px] font-data-mono text-outline">Microservices</span>
+</div>
+</div>
+</div>
+</div>
+<div class="p-4 hairline-t bg-surface text-center">
+<button class="font-body-sm text-primary hover:text-primary-container transition-colors flex items-center justify-center gap-1 w-full">
+                            View Full Result Set (2,491)
+                            <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+</section>
+</div>
+</div>
+</main>
+<script>
+        // Simple script to update slider visuals (simulating the UI interaction)
+        document.querySelectorAll('input[type="range"]').forEach(slider => {
+            slider.addEventListener('input', (e) => {
+                const val = e.target.value;
+                const container = e.target.parentElement;
+                const fillBar = container.querySelector('.bg-secondary-container');
+                const numberDisplay = container.parentElement.querySelector('.font-data-mono');
+                
+                if (fillBar) fillBar.style.width = val + '%';
+                if (numberDisplay) numberDisplay.textContent = val + '%';
+            });
+        });
+    </script>
+</body></html>

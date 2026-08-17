@@ -1,0 +1,105 @@
+# Production-like stack. Differs from docker-compose.yml (dev) in every way that matters:
+#   - builds the real production images (default Dockerfiles), no source bind-mounts
+#   - frontend is the nginx image, the only service published to the host
+#   - API, worker, AI service, Mongo, Redis, Qdrant stay on the internal network
+#   - a dedicated worker container runs the resume queue (not the in-process dev worker)
+#   - everything restarts unless explicitly stopped
+#
+# Bring up with:  docker compose -f docker-compose.prod.yml up --build -d
+#
+# Reads its own values from a root `.env` file (compose auto-loads it). Required there:
+#   VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY  (baked into the frontend at build time)
+#   PUBLIC_SITE_ORIGIN                          (e.g. https://itap.example.com — CORS/socket)
+#   AI_SERVICE_TOKEN                            (shared secret; API ⇄ AI service)
+# The API and AI service also read their own ./backend/.env and ./ai-service/.env.
+
+services:
+  web:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_BASE_URL: /api
+        VITE_SOCKET_URL: /
+        VITE_SUPABASE_URL: ${VITE_SUPABASE_URL}
+        VITE_SUPABASE_ANON_KEY: ${VITE_SUPABASE_ANON_KEY}
+    ports:
+      - "${WEB_PORT:-8080}:80"
+    depends_on:
+      - api
+    restart: unless-stopped
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    env_file:
+      - ./backend/.env
+    environment:
+      - NODE_ENV=production
+      - MONGODB_URI=mongodb://mongo:27017/itap
+      - REDIS_URL=redis://redis:6379
+      - AI_SERVICE_URL=http://ai-service:8000
+      - AI_SERVICE_TOKEN=${AI_SERVICE_TOKEN}
+      - CLIENT_ORIGIN=${PUBLIC_SITE_ORIGIN:-http://localhost:8080}
+    depends_on:
+      - mongo
+      - redis
+      - ai-service
+    restart: unless-stopped
+
+  worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    command: ["node", "src/queues/worker.js"]
+    env_file:
+      - ./backend/.env
+    environment:
+      - NODE_ENV=production
+      - MONGODB_URI=mongodb://mongo:27017/itap
+      - REDIS_URL=redis://redis:6379
+      - AI_SERVICE_URL=http://ai-service:8000
+      - AI_SERVICE_TOKEN=${AI_SERVICE_TOKEN}
+    depends_on:
+      - mongo
+      - redis
+      - ai-service
+    restart: unless-stopped
+
+  ai-service:
+    build:
+      context: ./ai-service
+      dockerfile: Dockerfile
+    env_file:
+      - ./ai-service/.env
+    environment:
+      - QDRANT_URL=http://qdrant:6333
+      - AI_SERVICE_TOKEN=${AI_SERVICE_TOKEN}
+    depends_on:
+      - qdrant
+    restart: unless-stopped
+
+  mongo:
+    image: mongo:7
+    volumes:
+      - mongo-data:/data/db
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    volumes:
+      - qdrant-data:/qdrant/storage
+    restart: unless-stopped
+
+volumes:
+  mongo-data:
+  redis-data:
+  qdrant-data:

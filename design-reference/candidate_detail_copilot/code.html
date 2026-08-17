@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ITAP - Candidate Detail</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                            "surface-tint": "#356381",
+                            "on-background": "#0e1d2a",
+                            "on-error-container": "#93000a",
+                            "error": "#ba1a1a",
+                            "surface-container-high": "#dbe9fd",
+                            "on-primary-container": "#92bfe0",
+                            "outline": "#72787e",
+                            "on-secondary-fixed": "#291800",
+                            "surface-bright": "#f8f9ff",
+                            "background": "#f8f9ff",
+                            "inverse-surface": "#243240",
+                            "primary": "#003751",
+                            "on-surface": "#0e1d2a",
+                            "primary-container": "#1d4e6b",
+                            "surface": "#f8f9ff",
+                            "surface-variant": "#d5e4f7",
+                            "surface-container-low": "#eef4ff",
+                            "on-error": "#ffffff",
+                            "on-primary-fixed-variant": "#194b68",
+                            "on-tertiary": "#ffffff",
+                            "on-tertiary-fixed": "#2a1700",
+                            "on-secondary-container": "#764e00",
+                            "tertiary": "#4b2c00",
+                            "primary-fixed": "#c8e6ff",
+                            "secondary-fixed": "#ffddb0",
+                            "primary-fixed-dim": "#9fccee",
+                            "secondary-container": "#fec163",
+                            "on-tertiary-fixed-variant": "#633f0c",
+                            "on-surface-variant": "#41474d",
+                            "tertiary-fixed": "#ffddb8",
+                            "on-primary": "#ffffff",
+                            "error-container": "#ffdad6",
+                            "outline-variant": "#c1c7ce",
+                            "surface-dim": "#cddbef",
+                            "surface-container-highest": "#d5e4f7",
+                            "secondary-fixed-dim": "#f8bc5e",
+                            "surface-container-lowest": "#ffffff",
+                            "on-tertiary-container": "#e3b073",
+                            "surface-container": "#e4efff",
+                            "tertiary-container": "#66420f",
+                            "on-secondary": "#ffffff",
+                            "inverse-on-surface": "#e9f1ff",
+                            "secondary": "#805600",
+                            "on-primary-fixed": "#001e2f",
+                            "tertiary-fixed-dim": "#f1bd7f",
+                            "inverse-primary": "#9fccee",
+                            "on-secondary-fixed-variant": "#614000",
+                            "slate": "#5B6B7C",
+                            "brass": "#B59E54",
+                            "ink": "#0e1d2a"
+                    },
+                    "borderRadius": {
+                            "DEFAULT": "0.125rem",
+                            "lg": "0.25rem",
+                            "xl": "0.5rem",
+                            "full": "0.75rem"
+                    },
+                    "spacing": {
+                            "lg": "24px",
+                            "xl": "32px",
+                            "md": "16px",
+                            "gutter": "16px",
+                            "base": "4px",
+                            "xs": "4px",
+                            "sm": "8px",
+                            "margin-mobile": "16px",
+                            "margin-desktop": "32px"
+                    },
+                    "fontFamily": {
+                            "label-caps": ["Inter"],
+                            "body-sm": ["Inter"],
+                            "body-lg": ["Inter"],
+                            "body-md": ["Inter"],
+                            "display-sm": ["Space Grotesk"],
+                            "display-md": ["Space Grotesk"],
+                            "data-mono": ["IBM Plex Mono"],
+                            "display-lg": ["Space Grotesk"]
+                    },
+                    "fontSize": {
+                            "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                            "body-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}],
+                            "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                            "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                            "display-sm": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                            "display-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                            "data-mono": ["13px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                            "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600&amp;family=IBM+Plex+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .hairline-border { border: 1px solid rgba(91, 107, 124, 0.2); }
+        .hairline-border-b { border-bottom: 1px solid rgba(91, 107, 124, 0.2); }
+        .data-row:hover { background-color: #F5F6F8; }
+        .ai-highlight { border-left: 3px solid #B59E54; background-color: rgba(181, 158, 84, 0.05); }
+        body { background-color: #F5F6F8; }
+    </style>
+</head>
+<body class="text-on-background font-body-md antialiased overflow-hidden flex">
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 h-screen w-[72px] bg-primary dark:bg-on-background flex flex-col items-center py-lg z-50 transition-all duration-200 ease-in-out border-r border-outline-variant/20 hidden md:flex">
+<!-- Logo -->
+<div class="mb-xl flex flex-col items-center">
+<div class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center mb-2">
+<span class="font-display-sm text-display-sm text-primary-fixed">ITAP</span>
+</div>
+<span class="font-label-caps text-label-caps text-primary-fixed-dim">Talent AI</span>
+</div>
+<!-- CTA -->
+<button class="w-10 h-10 bg-surface-container-high text-primary rounded-full flex items-center justify-center mb-xl hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+<!-- Nav Items -->
+<div class="flex flex-col gap-sm w-full px-2 flex-grow">
+<a class="w-full aspect-square flex flex-col items-center justify-center rounded-lg text-primary-fixed-dim hover:bg-primary-fixed-variant/20 transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">dashboard</span>
+<span class="font-label-caps text-[9px] uppercase">Dashboard</span>
+</a>
+<a class="w-full aspect-square flex flex-col items-center justify-center rounded-lg bg-primary-container text-on-primary-container transition-colors relative" href="#">
+<span class="material-symbols-outlined mb-1">groups</span>
+<span class="font-label-caps text-[9px] uppercase">Candidates</span>
+</a>
+<a class="w-full aspect-square flex flex-col items-center justify-center rounded-lg text-primary-fixed-dim hover:bg-primary-fixed-variant/20 transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">account_tree</span>
+<span class="font-label-caps text-[9px] uppercase">Pipeline</span>
+</a>
+<a class="w-full aspect-square flex flex-col items-center justify-center rounded-lg text-primary-fixed-dim hover:bg-primary-fixed-variant/20 transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">analytics</span>
+<span class="font-label-caps text-[9px] uppercase">Analytics</span>
+</a>
+<a class="w-full aspect-square flex flex-col items-center justify-center rounded-lg text-primary-fixed-dim hover:bg-primary-fixed-variant/20 transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">description</span>
+<span class="font-label-caps text-[9px] uppercase">Reports</span>
+</a>
+</div>
+<!-- Footer Actions -->
+<div class="flex flex-col gap-sm w-full px-2 mt-auto">
+<a class="w-full aspect-square flex flex-col items-center justify-center rounded-lg text-primary-fixed-dim hover:bg-primary-fixed-variant/20 transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">help</span>
+<span class="font-label-caps text-[9px] uppercase">Help</span>
+</a>
+<a class="w-full aspect-square flex flex-col items-center justify-center rounded-lg text-primary-fixed-dim hover:bg-primary-fixed-variant/20 transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">logout</span>
+<span class="font-label-caps text-[9px] uppercase">Logout</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col h-screen md:ml-[72px] transition-all duration-300 pr-[360px]" id="main-content">
+<!-- TopNavBar (Mobile only for detailed view usually, but maintaining for consistency or breadcrumbs) -->
+<header class="sticky top-0 z-40 flex justify-between items-center w-full px-margin-desktop h-16 bg-surface dark:bg-surface-container-low border-b border-outline-variant/20">
+<div class="flex items-center gap-sm">
+<button class="text-on-surface-variant hover:text-primary transition-colors flex items-center">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<div class="flex items-center text-sm">
+<span class="text-on-surface-variant">Candidates</span>
+<span class="material-symbols-outlined text-[16px] mx-1 text-outline-variant">chevron_right</span>
+<span class="font-medium text-primary">Sarah Chen</span>
+</div>
+</div>
+<div class="flex flex-1 max-w-md mx-md">
+<!-- Search Bar Space if needed -->
+</div>
+<div class="flex items-center gap-md">
+<button class="text-on-surface-variant hover:bg-surface-container-high p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container-high p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-variant border border-outline-variant/30 flex items-center justify-center overflow-hidden">
+<img alt="User avatar with initials" class="w-full h-full object-cover" data-alt="A small, professional user avatar portrait of a business executive in a high-tech corporate setting, cool neutral lighting, modern corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZof7X_B_iRj7rU6BpMlp9erGHOEoawC3D9H_pTgKex3vcd7N2Wr6CMhSRcXXXcQ-aUP-t05HGgggtnwu1Din0ovwfVtEEt6Sf0K1uCgnB0lroyVXZvv_rZ9K6IU33qG2OvXXn02CnNBZK1Qe8KYcd2vG7zMSeUnFE5Dsl8Zw2T5GAfRPI6-O4U1u4kOVe2EP6mV0EgAeMP4_dFCkGDl0vp90zzCNzMRSsZZ_udTw5RpR39z48I388CA"/>
+</div>
+</div>
+</header>
+<!-- Canvas Area -->
+<div class="flex-1 overflow-y-auto p-margin-desktop">
+<div class="max-w-5xl mx-auto flex flex-col gap-lg">
+<!-- Hero Header -->
+<div class="flex items-start justify-between">
+<div>
+<h1 class="font-display-lg text-display-lg text-primary mb-2">Sarah Chen</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Senior Product Designer · San Francisco, CA</p>
+<div class="flex gap-sm mt-4">
+<span class="inline-flex items-center px-2 py-1 rounded bg-surface-container border border-outline-variant/30 font-data-mono text-data-mono text-primary">
+<span class="material-symbols-outlined text-[14px] mr-1">work</span> Available Now
+                            </span>
+<span class="inline-flex items-center px-2 py-1 rounded bg-surface-container border border-outline-variant/30 font-data-mono text-data-mono text-primary">
+<span class="material-symbols-outlined text-[14px] mr-1">attach_money</span> $160k - $180k
+                            </span>
+</div>
+</div>
+<div class="flex gap-md">
+<button class="px-4 py-2 border border-slate/30 rounded font-body-md text-body-md text-on-background hover:bg-surface-container transition-colors flex items-center">
+<span class="material-symbols-outlined mr-2 text-[18px]">bookmark</span> Save
+                        </button>
+<button class="px-4 py-2 bg-primary text-white rounded font-body-md text-body-md hover:opacity-90 transition-opacity flex items-center">
+<span class="material-symbols-outlined mr-2 text-[18px]">send</span> Contact Candidate
+                        </button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Match Gauge Card -->
+<div class="col-span-12 md:col-span-4 bg-white hairline-border rounded-lg p-lg flex flex-col items-center justify-center relative">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant absolute top-lg left-lg">AI Match Score</h3>
+<!-- Simulated Match Dial -->
+<div class="relative w-40 h-20 mt-8 mb-4 overflow-hidden">
+<div class="absolute w-40 h-40 border-[12px] border-surface-container rounded-full top-0 left-0"></div>
+<div class="absolute w-40 h-40 border-[12px] border-primary rounded-full top-0 left-0" style="clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%); transform: rotate(160deg);"></div>
+</div>
+<div class="absolute bottom-lg flex flex-col items-center">
+<span class="font-data-mono text-display-lg text-primary">94</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Exceptional Fit</span>
+</div>
+</div>
+<!-- AI Reasoning -->
+<div class="col-span-12 md:col-span-8 bg-white hairline-border rounded-lg p-lg ai-highlight">
+<div class="flex items-center mb-md">
+<span class="material-symbols-outlined text-brass mr-2">auto_awesome</span>
+<h3 class="font-label-caps text-label-caps text-primary">Why this candidate?</h3>
+</div>
+<ul class="space-y-sm text-body-md">
+<li class="flex items-start">
+<span class="text-brass mr-2 mt-1">•</span>
+<span>Strong overlap in <strong>System Design</strong> experience matching your core requirement for scaling the platform ecosystem.</span>
+</li>
+<li class="flex items-start">
+<span class="text-brass mr-2 mt-1">•</span>
+<span>Demonstrated history of collaborating cross-functionally, aligning well with your engineering-heavy culture index.</span>
+</li>
+<li class="flex items-start">
+<span class="text-brass mr-2 mt-1">•</span>
+<span>Recent tenure indicates high stability; average role duration is 3.5 years in highly competitive environments.</span>
+</li>
+</ul>
+</div>
+<!-- Experience Timeline -->
+<div class="col-span-12 bg-white hairline-border rounded-lg p-lg">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-lg">Experience</h3>
+<div class="space-y-0">
+<!-- Role 1 -->
+<div class="data-row p-md -mx-md rounded transition-colors hairline-border-b">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-body-md font-semibold text-primary">Lead Product Designer</h4>
+<span class="font-data-mono text-data-mono text-on-surface-variant">2020 - Present</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-2">Acme Corp · Full-time</p>
+<p class="font-body-md text-body-md">Led the design system overhaul, resulting in a 40% decrease in development time for new features. Managed a team of 3 junior designers.</p>
+</div>
+<!-- Role 2 -->
+<div class="data-row p-md -mx-md rounded transition-colors">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-body-md font-semibold text-primary">Product Designer</h4>
+<span class="font-data-mono text-data-mono text-on-surface-variant">2017 - 2020</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-2">TechFlow Solutions · Full-time</p>
+<p class="font-body-md text-body-md">Spearheaded the UX research initiatives for the core enterprise dashboard, improving user retention by 25% over two quarters.</p>
+</div>
+</div>
+</div>
+<!-- Skills Matrix -->
+<div class="col-span-12 md:col-span-6 bg-white hairline-border rounded-lg p-lg">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-md">Skill Matrix</h3>
+<div class="flex flex-wrap gap-sm">
+<span class="px-3 py-1 bg-surface border border-slate/20 rounded font-data-mono text-data-mono text-primary">System Design</span>
+<span class="px-3 py-1 bg-surface border border-slate/20 rounded font-data-mono text-data-mono text-primary">User Research</span>
+<span class="px-3 py-1 bg-surface border border-slate/20 rounded font-data-mono text-data-mono text-primary">Prototyping</span>
+<span class="px-3 py-1 bg-surface border border-slate/20 rounded font-data-mono text-data-mono text-primary">Figma</span>
+<span class="px-3 py-1 bg-surface border border-slate/20 rounded font-data-mono text-data-mono text-primary">Data Viz</span>
+<span class="px-3 py-1 bg-brass/10 border border-brass/30 rounded font-data-mono text-data-mono text-on-secondary-fixed flex items-center">
+<span class="material-symbols-outlined text-[14px] mr-1">auto_awesome</span> AI Integration
+                            </span>
+</div>
+</div>
+<!-- Education -->
+<div class="col-span-12 md:col-span-6 bg-white hairline-border rounded-lg p-lg">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-md">Education</h3>
+<div>
+<h4 class="font-body-md font-semibold text-primary">B.S. Human-Computer Interaction</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Carnegie Mellon University · 2013 - 2017</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Copilot Drawer (Fixed Right Side) -->
+<aside class="fixed right-0 top-0 h-screen w-[360px] bg-ink text-white shadow-[-4px_0_12px_rgba(0,0,0,0.1)] flex flex-col z-50 transform transition-transform duration-300">
+<!-- Drawer Header -->
+<div class="flex items-center justify-between p-md border-b border-white/10">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-brass">robot_2</span>
+<span class="font-display-sm text-display-sm">Copilot</span>
+</div>
+<button class="text-outline-variant hover:text-white transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Chat History -->
+<div class="flex-1 overflow-y-auto p-md space-y-md">
+<!-- Context Note -->
+<div class="text-center mb-6">
+<span class="font-label-caps text-[10px] text-outline-variant">Comparing with Marcus Thorne</span>
+</div>
+<!-- User Message -->
+<div class="flex flex-col items-end">
+<div class="bg-primary-container text-on-primary-container px-4 py-2 rounded-lg rounded-tr-none max-w-[85%] font-body-sm border border-primary/50">
+                    Why was this candidate ranked above Marcus Thorne?
+                </div>
+<span class="font-label-caps text-[10px] text-outline-variant mt-1">10:42 AM</span>
+</div>
+<!-- AI Message -->
+<div class="flex flex-col items-start">
+<div class="bg-inverse-surface border border-slate/30 text-surface-bright px-4 py-3 rounded-lg rounded-tl-none max-w-[95%] font-body-sm">
+<p class="mb-2">Sarah Chen was ranked <strong class="text-brass">94</strong> vs Marcus Thorne's <strong class="text-outline-variant">88</strong> primarily due to dimensional fit in two key areas:</p>
+<ul class="space-y-2 mt-3">
+<li class="flex items-start">
+<span class="text-brass mr-2 mt-0.5">•</span>
+<span><strong>System Scale:</strong> Sarah has directly led design systems serving &gt;1M MAU at Acme Corp. Marcus's experience is currently limited to startup environments (&lt;100k MAU).</span>
+</li>
+<li class="flex items-start">
+<span class="text-brass mr-2 mt-0.5">•</span>
+<span><strong>Skill Recency:</strong> Sarah's recent focus on 'AI Integration' (inferred from recent project deployments) perfectly aligns with your Q3 roadmap requirements.</span>
+</li>
+</ul>
+<div class="mt-4 p-2 bg-black/20 rounded border border-white/5 flex items-center justify-between">
+<span class="font-data-mono text-[11px] text-outline-variant">Confidence Score: High</span>
+<a class="font-label-caps text-brass hover:underline flex items-center" href="#">
+                            View Marcus <span class="material-symbols-outlined text-[12px] ml-1">arrow_forward</span>
+</a>
+</div>
+</div>
+<span class="font-label-caps text-[10px] text-outline-variant mt-1">10:43 AM</span>
+</div>
+</div>
+<!-- Input Area -->
+<div class="p-md border-t border-white/10 bg-ink">
+<div class="relative">
+<textarea class="w-full bg-inverse-surface border border-slate/50 rounded-lg text-white font-body-sm py-2 pl-3 pr-10 focus:ring-1 focus:ring-brass focus:border-brass resize-none placeholder-outline-variant" placeholder="Ask Copilot about this candidate..." rows="2"></textarea>
+<button class="absolute right-2 bottom-2 p-1 text-brass hover:text-white transition-colors bg-white/5 rounded">
+<span class="material-symbols-outlined text-[18px]">send</span>
+</button>
+</div>
+<div class="flex gap-2 mt-2 overflow-x-auto pb-1 no-scrollbar">
+<span class="whitespace-nowrap px-2 py-1 bg-white/5 border border-white/10 rounded font-label-caps text-[10px] text-outline-variant cursor-pointer hover:bg-white/10">Summarize strengths</span>
+<span class="whitespace-nowrap px-2 py-1 bg-white/5 border border-white/10 rounded font-label-caps text-[10px] text-outline-variant cursor-pointer hover:bg-white/10">Find culture risks</span>
+</div>
+</div>
+</aside>
+</body></html>

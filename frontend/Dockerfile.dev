@@ -1,0 +1,9 @@
+# Development image — Vite dev server with HMR, source bind-mounted by docker-compose.yml.
+# For production use the default ./Dockerfile (multi-stage build served by nginx) instead.
+FROM node:20-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+EXPOSE 5173
+CMD ["npm", "run", "dev", "--", "--host"]

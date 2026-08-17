@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ITAP - Candidate Dashboard</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-tint": "#356381",
+                    "on-background": "#0e1d2a",
+                    "on-error-container": "#93000a",
+                    "error": "#ba1a1a",
+                    "surface-container-high": "#dbe9fd",
+                    "on-primary-container": "#92bfe0",
+                    "outline": "#72787e",
+                    "on-secondary-fixed": "#291800",
+                    "surface-bright": "#f8f9ff",
+                    "background": "#f8f9ff",
+                    "inverse-surface": "#243240",
+                    "primary": "#003751",
+                    "on-surface": "#0e1d2a",
+                    "primary-container": "#1d4e6b",
+                    "surface": "#f8f9ff",
+                    "surface-variant": "#d5e4f7",
+                    "surface-container-low": "#eef4ff",
+                    "on-error": "#ffffff",
+                    "on-primary-fixed-variant": "#194b68",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed": "#2a1700",
+                    "on-secondary-container": "#764e00",
+                    "tertiary": "#4b2c00",
+                    "primary-fixed": "#c8e6ff",
+                    "secondary-fixed": "#ffddb0",
+                    "primary-fixed-dim": "#9fccee",
+                    "secondary-container": "#fec163",
+                    "on-tertiary-fixed-variant": "#633f0c",
+                    "on-surface-variant": "#41474d",
+                    "tertiary-fixed": "#ffddb8",
+                    "on-primary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "outline-variant": "#c1c7ce",
+                    "surface-dim": "#cddbef",
+                    "surface-container-highest": "#d5e4f7",
+                    "secondary-fixed-dim": "#f8bc5e",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-container": "#e3b073",
+                    "surface-container": "#e4efff",
+                    "tertiary-container": "#66420f",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#e9f1ff",
+                    "secondary": "#805600",
+                    "on-primary-fixed": "#001e2f",
+                    "tertiary-fixed-dim": "#f1bd7f",
+                    "inverse-primary": "#9fccee",
+                    "on-secondary-fixed-variant": "#614000"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "lg": "24px",
+                    "xl": "32px",
+                    "md": "16px",
+                    "gutter": "16px",
+                    "base": "4px",
+                    "xs": "4px",
+                    "sm": "8px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "32px"
+            },
+            "fontFamily": {
+                    "label-caps": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "display-sm": ["Space Grotesk"],
+                    "display-md": ["Space Grotesk"],
+                    "data-mono": ["IBM Plex Mono"],
+                    "display-lg": ["Space Grotesk"]
+            },
+            "fontSize": {
+                    "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "body-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "display-sm": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "display-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "data-mono": ["13px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .match-dial {
+            background: conic-gradient(var(--brass-color) var(--match-percentage), transparent 0);
+            border-radius: 50%;
+            mask: radial-gradient(transparent 50%, black 50%);
+            -webkit-mask: radial-gradient(transparent 50%, black 50%);
+        }
+        :root {
+            --brass-color: #f8bc5e; /* secondary-fixed-dim */
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex antialiased">
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 h-screen flex flex-col items-center py-lg z-50 bg-primary dark:bg-on-background w-[72px]">
+<!-- Brand/Header Area -->
+<div class="flex flex-col items-center mb-xl">
+<div class="font-display-sm text-display-sm text-primary-fixed mb-xs">
+                ITAP
+            </div>
+<div class="font-label-caps text-label-caps text-primary-fixed-dim">
+                Talent AI
+            </div>
+</div>
+<!-- CTA -->
+<button class="w-12 h-12 rounded-lg bg-surface-tint text-on-primary flex items-center justify-center mb-xl hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+</button>
+<!-- Main Navigation Tabs -->
+<div class="flex flex-col space-y-sm w-full px-sm">
+<a class="flex flex-col items-center justify-center py-sm text-primary-fixed-dim hover:bg-primary-fixed-variant/20 transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined mb-xs">dashboard</span>
+<span class="font-label-caps text-label-caps hidden group-hover:block absolute left-[80px] bg-inverse-surface text-inverse-on-surface px-sm py-xs rounded whitespace-nowrap z-50">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center py-sm bg-primary-container text-on-primary-container rounded-lg transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined mb-xs">groups</span>
+<span class="font-label-caps text-label-caps hidden group-hover:block absolute left-[80px] bg-inverse-surface text-inverse-on-surface px-sm py-xs rounded whitespace-nowrap z-50">Candidates</span>
+</a>
+<a class="flex flex-col items-center justify-center py-sm text-primary-fixed-dim hover:bg-primary-fixed-variant/20 transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined mb-xs">account_tree</span>
+<span class="font-label-caps text-label-caps hidden group-hover:block absolute left-[80px] bg-inverse-surface text-inverse-on-surface px-sm py-xs rounded whitespace-nowrap z-50">Pipeline</span>
+</a>
+<a class="flex flex-col items-center justify-center py-sm text-primary-fixed-dim hover:bg-primary-fixed-variant/20 transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined mb-xs">analytics</span>
+<span class="font-label-caps text-label-caps hidden group-hover:block absolute left-[80px] bg-inverse-surface text-inverse-on-surface px-sm py-xs rounded whitespace-nowrap z-50">Analytics</span>
+</a>
+<a class="flex flex-col items-center justify-center py-sm text-primary-fixed-dim hover:bg-primary-fixed-variant/20 transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined mb-xs">description</span>
+<span class="font-label-caps text-label-caps hidden group-hover:block absolute left-[80px] bg-inverse-surface text-inverse-on-surface px-sm py-xs rounded whitespace-nowrap z-50">Reports</span>
+</a>
+</div>
+<!-- Footer Tabs -->
+<div class="mt-auto flex flex-col space-y-sm w-full px-sm pb-md">
+<a class="flex flex-col items-center justify-center py-sm text-primary-fixed-dim hover:bg-primary-fixed-variant/20 transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined mb-xs">help</span>
+</a>
+<a class="flex flex-col items-center justify-center py-sm text-primary-fixed-dim hover:bg-primary-fixed-variant/20 transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined mb-xs">logout</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="ml-[72px] flex-1 flex flex-col w-full">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-40 flex justify-between items-center w-full px-margin-desktop h-16 bg-surface dark:bg-surface-container-low border-b border-outline-variant/20">
+<!-- Left: Search/Context -->
+<div class="flex items-center space-x-md flex-1">
+<div class="font-display-md text-display-md font-bold text-primary dark:text-primary-fixed mr-xl">
+                    ITAP
+                </div>
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full h-8 pl-[32px] pr-sm bg-surface-container-lowest border border-outline-variant/50 focus:border-primary rounded text-body-sm font-body-sm outline-none transition-colors placeholder:text-outline-variant" placeholder="Search candidates..." type="text"/>
+</div>
+</div>
+<!-- Right: Actions -->
+<div class="flex items-center space-x-md">
+<button class="text-on-surface-variant hover:bg-surface-container-high transition-colors p-xs rounded">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container-high transition-colors p-xs rounded">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest border border-outline-variant overflow-hidden flex items-center justify-center ml-sm cursor-pointer hover:opacity-80 transition-opacity">
+<span class="font-label-caps text-label-caps text-on-surface-variant">JD</span>
+</div>
+</div>
+</header>
+<!-- Page Content Canvas -->
+<div class="p-margin-desktop max-w-7xl mx-auto w-full">
+<!-- Page Header & KPIs -->
+<div class="flex items-end justify-between mb-xl">
+<div>
+<h1 class="font-display-lg text-display-lg text-on-surface mb-sm tracking-tight">Pipeline: Senior Product Designer</h1>
+<div class="flex items-center space-x-lg text-body-sm text-on-surface-variant font-body-sm">
+<div class="flex items-center">
+<span class="w-2 h-2 rounded-full bg-outline mr-xs"></span>
+                            Total: 42
+                        </div>
+<div class="flex items-center text-secondary">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed-dim mr-xs"></span>
+                            AI-Shortlisted: 12
+                        </div>
+<div class="flex items-center text-primary-container">
+<span class="w-2 h-2 rounded-full bg-primary-fixed-dim mr-xs"></span>
+                            Interviewing: 4
+                        </div>
+</div>
+</div>
+<button class="h-9 px-md bg-primary text-on-primary font-body-sm text-body-sm rounded hover:bg-primary/90 transition-colors flex items-center">
+<span class="material-symbols-outlined text-[16px] mr-xs">filter_list</span>
+                    Filter Pipeline
+                </button>
+</div>
+<!-- Candidate Table -->
+<div class="bg-surface-container-lowest border border-outline-variant/20 rounded-lg overflow-hidden">
+<!-- Table Header -->
+<div class="grid grid-cols-12 gap-gutter px-md py-sm bg-surface-container-low border-b border-outline-variant/20 text-label-caps font-label-caps text-on-surface-variant">
+<div class="col-span-2 pl-sm">Match</div>
+<div class="col-span-3">Candidate</div>
+<div class="col-span-2">Stage</div>
+<div class="col-span-2">Applied</div>
+<div class="col-span-3">AI Insight</div>
+</div>
+<!-- Data Rows -->
+<div class="flex flex-col divide-y divide-outline-variant/15">
+<!-- Row 1: Sarah Chen -->
+<div class="grid grid-cols-12 gap-gutter px-md py-md items-center hover:bg-surface transition-colors group">
+<!-- Match Score -->
+<div class="col-span-2 flex items-center pl-sm">
+<div class="relative w-10 h-10 flex items-center justify-center mr-sm">
+<!-- Simulated Match Dial -->
+<svg class="w-10 h-10 transform -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-variant stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-dasharray="50, 100" stroke-width="3"></path>
+<path class="text-secondary-fixed-dim stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-dasharray="47, 100" stroke-width="3"></path> <!-- 94% of 50 (half circle) -->
+</svg>
+<span class="absolute font-data-mono text-data-mono text-on-surface">94</span>
+</div>
+</div>
+<!-- Candidate -->
+<div class="col-span-3 flex flex-col justify-center border-l-[3px] border-secondary-fixed-dim pl-sm -ml-[3px]">
+<span class="font-body-md text-body-md font-medium text-on-surface">Sarah Chen</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-xs">Lead UX at FinTech Corp</span>
+</div>
+<!-- Stage -->
+<div class="col-span-2 flex items-center">
+<span class="inline-flex items-center px-2 py-1 rounded bg-primary-fixed/30 text-primary-fixed-variant font-label-caps text-label-caps border border-primary-fixed">
+                                Interviewing
+                            </span>
+</div>
+<!-- Applied -->
+<div class="col-span-2 font-data-mono text-data-mono text-on-surface-variant flex items-center">
+                            Oct 12, 2023
+                        </div>
+<!-- AI Insight -->
+<div class="col-span-3 flex items-start bg-secondary-fixed/10 p-sm rounded border border-secondary-fixed/20 relative">
+<span class="material-symbols-outlined text-[14px] text-secondary mr-xs mt-[2px]">lightbulb</span>
+<span class="font-body-sm text-body-sm text-on-secondary-container leading-tight">Exceptional alignment in systemic design methodology. Strong portfolio in high-density data visualization.</span>
+</div>
+</div>
+<!-- Row 2: Marcus Thorne -->
+<div class="grid grid-cols-12 gap-gutter px-md py-md items-center hover:bg-surface transition-colors group">
+<div class="col-span-2 flex items-center pl-sm">
+<div class="relative w-10 h-10 flex items-center justify-center mr-sm">
+<svg class="w-10 h-10 transform -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-variant stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-dasharray="50, 100" stroke-width="3"></path>
+<path class="text-secondary-fixed-dim stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-dasharray="44, 100" stroke-width="3"></path>
+</svg>
+<span class="absolute font-data-mono text-data-mono text-on-surface">88</span>
+</div>
+</div>
+<div class="col-span-3 flex flex-col justify-center border-l-[3px] border-secondary-fixed-dim pl-sm -ml-[3px]">
+<span class="font-body-md text-body-md font-medium text-on-surface">Marcus Thorne</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-xs">Senior Designer at HealthTech</span>
+</div>
+<div class="col-span-2 flex items-center">
+<span class="inline-flex items-center px-2 py-1 rounded bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps border border-outline-variant/50">
+                                AI Shortlist
+                            </span>
+</div>
+<div class="col-span-2 font-data-mono text-data-mono text-on-surface-variant flex items-center">
+                            Oct 14, 2023
+                        </div>
+<div class="col-span-3 flex items-start bg-secondary-fixed/10 p-sm rounded border border-secondary-fixed/20">
+<span class="material-symbols-outlined text-[14px] text-secondary mr-xs mt-[2px]">lightbulb</span>
+<span class="font-body-sm text-body-sm text-on-secondary-container leading-tight">Demonstrates high technical proficiency. Minor gap in enterprise SaaS scaling experience noted.</span>
+</div>
+</div>
+<!-- Row 3: Elena Rodriguez -->
+<div class="grid grid-cols-12 gap-gutter px-md py-md items-center hover:bg-surface transition-colors group">
+<div class="col-span-2 flex items-center pl-sm">
+<div class="relative w-10 h-10 flex items-center justify-center mr-sm">
+<svg class="w-10 h-10 transform -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-variant stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-dasharray="50, 100" stroke-width="3"></path>
+<path class="text-secondary-fixed-dim stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-dasharray="41, 100" stroke-width="3"></path>
+</svg>
+<span class="absolute font-data-mono text-data-mono text-on-surface">82</span>
+</div>
+</div>
+<div class="col-span-3 flex flex-col justify-center border-l-[3px] border-transparent pl-sm -ml-[3px]">
+<span class="font-body-md text-body-md font-medium text-on-surface">Elena Rodriguez</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-xs">Product Designer at E-Comm Co</span>
+</div>
+<div class="col-span-2 flex items-center">
+<span class="inline-flex items-center px-2 py-1 rounded bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps border border-outline-variant/50">
+                                AI Shortlist
+                            </span>
+</div>
+<div class="col-span-2 font-data-mono text-data-mono text-on-surface-variant flex items-center">
+                            Oct 15, 2023
+                        </div>
+<div class="col-span-3 flex items-start bg-secondary-fixed/10 p-sm rounded border border-secondary-fixed/20">
+<span class="material-symbols-outlined text-[14px] text-secondary mr-xs mt-[2px]">lightbulb</span>
+<span class="font-body-sm text-body-sm text-on-secondary-container leading-tight">Strong visual skills. Recommend probing on complex user flows during initial screen.</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

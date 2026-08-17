@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ITAP - Pipeline Management</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600&amp;family=IBM+Plex+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed-variant": "#614000",
+                        "inverse-primary": "#9fccee",
+                        "primary-container": "#1d4e6b",
+                        "on-surface": "#0e1d2a",
+                        "surface-dim": "#cddbef",
+                        "inverse-on-surface": "#e9f1ff",
+                        "secondary-fixed-dim": "#f8bc5e",
+                        "tertiary": "#4b2c00",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#eef4ff",
+                        "surface-container": "#e4efff",
+                        "on-surface-variant": "#41474d",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#9fccee",
+                        "on-error-container": "#93000a",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#194b68",
+                        "on-secondary-fixed": "#291800",
+                        "primary": "#003751",
+                        "secondary-fixed": "#ffddb0",
+                        "secondary-container": "#fec163",
+                        "surface-container-highest": "#d5e4f7",
+                        "primary-fixed": "#c8e6ff",
+                        "on-tertiary-fixed": "#2a1700",
+                        "on-tertiary-fixed-variant": "#633f0c",
+                        "surface-variant": "#d5e4f7",
+                        "surface-tint": "#356381",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#92bfe0",
+                        "tertiary-fixed-dim": "#f1bd7f",
+                        "surface": "#f8f9ff",
+                        "error": "#ba1a1a",
+                        "secondary": "#805600",
+                        "tertiary-container": "#66420f",
+                        "surface-container-high": "#dbe9fd",
+                        "on-secondary": "#ffffff",
+                        "background": "#f8f9ff",
+                        "on-primary-fixed": "#001e2f",
+                        "surface-bright": "#f8f9ff",
+                        "outline": "#72787e",
+                        "on-tertiary-container": "#e3b073",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#ffddb8",
+                        "inverse-surface": "#243240",
+                        "on-secondary-container": "#764e00",
+                        "on-background": "#0e1d2a",
+                        "outline-variant": "#c1c7ce"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "gutter": "16px",
+                        "sm": "8px",
+                        "xl": "32px",
+                        "margin-mobile": "16px",
+                        "base": "4px",
+                        "xs": "4px",
+                        "margin-desktop": "32px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "data-mono": ["IBM Plex Mono", "monospace"],
+                        "label-caps": ["Inter", "sans-serif"],
+                        "display-sm": ["Space Grotesk", "sans-serif"],
+                        "display-md": ["Space Grotesk", "sans-serif"],
+                        "body-md": ["Inter", "sans-serif"],
+                        "display-lg": ["Space Grotesk", "sans-serif"],
+                        "body-sm": ["Inter", "sans-serif"],
+                        "body-lg": ["Inter", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "data-mono": ["13px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "display-sm": ["20px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "display-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom Utilities */
+        .hairline-b { border-bottom: 1px solid rgba(91, 107, 124, 0.15); }
+        .hairline-r { border-right: 1px solid rgba(91, 107, 124, 0.15); }
+        .hairline-all { border: 1px solid rgba(91, 107, 124, 0.20); }
+        
+        .ai-brass-bg { background-color: rgba(248, 188, 94, 0.08); border-left: 3px solid #f8bc5e; }
+        .ai-brass-text { color: #805600; } /* Using secondary as stand-in for dark brass */
+        
+        /* Checkbox styling */
+        .dense-checkbox {
+            width: 14px;
+            height: 14px;
+            border: 1px solid rgba(91, 107, 124, 0.4);
+            border-radius: 2px;
+            cursor: pointer;
+        }
+        
+        /* Table transitions */
+        .table-row-hover:hover { background-color: #f8f9ff; }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased flex w-full min-h-screen">
+<!-- Desktop Nav Shell Structure -->
+<div class="hidden md:flex flex-row w-full h-screen overflow-hidden">
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 h-screen flex flex-col items-center py-lg z-50 w-[72px] bg-primary dark:bg-on-background">
+<!-- Header/Brand -->
+<div class="flex flex-col items-center mb-xl">
+<div class="w-10 h-10 bg-surface-container-lowest rounded flex items-center justify-center mb-sm">
+<img alt="ITAP Logo" class="w-6 h-6 object-contain" data-alt="A highly detailed, ultra-minimalist vector logo for a technology company named ITAP, featuring abstract geometric shapes resembling data flow, rendered in deep prussian blue and crisp white on a flat background. Professional, high-end corporate identity design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFV7sFOyDsCUEyHXw1MWM9aTG9ssraxHqEi0TX6YHnNKcwH-jDRMG0ZAxqoeum4DfTgBg4U-YgSQUoDXI-NLF_EI2p1ZWZo6Ow2KC-kLq4jHDKGb6qlP9xgmZkpwJj2cjLpCJY6JALMw8xg1APyzAFJwGlHR_8bqCxylcEm_2uWbRCs1-mGpN0_m5qs8dMJoPg7T8FIvFX9XujDKKJNBtFI2Y2pmxeeNrEfWNBpo46Wq-LTF0DOJCbAA"/>
+</div>
+<span class="font-display-sm text-display-sm text-primary-fixed">ITAP</span>
+<span class="font-label-caps text-label-caps text-primary-fixed-dim text-[9px] mt-1">Talent AI</span>
+</div>
+<!-- Main Tabs -->
+<ul class="flex flex-col w-full gap-sm px-2 flex-grow">
+<li>
+<a class="flex flex-col items-center justify-center py-sm w-full transition-all duration-200 ease-in-out text-primary-fixed-dim hover:bg-primary-fixed-variant/20 rounded" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">dashboard</span>
+<span class="font-label-caps text-label-caps text-[9px] mt-1">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex flex-col items-center justify-center py-sm w-full transition-all duration-200 ease-in-out text-primary-fixed-dim hover:bg-primary-fixed-variant/20 rounded" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">groups</span>
+<span class="font-label-caps text-label-caps text-[9px] mt-1">Candidates</span>
+</a>
+</li>
+<li>
+<!-- Active State: Pipeline -->
+<a class="flex flex-col items-center justify-center py-sm w-full transition-all duration-200 ease-in-out bg-primary-container text-on-primary-container rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_tree</span>
+<span class="font-label-caps text-label-caps text-[9px] mt-1">Pipeline</span>
+</a>
+</li>
+<li>
+<a class="flex flex-col items-center justify-center py-sm w-full transition-all duration-200 ease-in-out text-primary-fixed-dim hover:bg-primary-fixed-variant/20 rounded" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">analytics</span>
+<span class="font-label-caps text-label-caps text-[9px] mt-1">Analytics</span>
+</a>
+</li>
+<li>
+<a class="flex flex-col items-center justify-center py-sm w-full transition-all duration-200 ease-in-out text-primary-fixed-dim hover:bg-primary-fixed-variant/20 rounded" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">description</span>
+<span class="font-label-caps text-label-caps text-[9px] mt-1">Reports</span>
+</a>
+</li>
+</ul>
+<!-- CTA & Footer -->
+<div class="flex flex-col items-center w-full px-2 mt-auto gap-sm">
+<button class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed hover:bg-secondary-container transition-colors mb-sm" title="New Search">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+<a class="flex flex-col items-center justify-center py-sm w-full transition-all duration-200 ease-in-out text-primary-fixed-dim hover:bg-primary-fixed-variant/20 rounded" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">help</span>
+</a>
+<a class="flex flex-col items-center justify-center py-sm w-full transition-all duration-200 ease-in-out text-primary-fixed-dim hover:bg-primary-fixed-variant/20 rounded" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">logout</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-grow flex flex-col pl-[72px] w-full bg-background overflow-y-auto">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-40 flex justify-between items-center w-full px-margin-desktop h-16 bg-surface dark:bg-surface-container-low border-b border-outline-variant/20">
+<div class="flex items-center flex-1 gap-xl">
+<!-- Search Bar (on_left) -->
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
+<input class="w-full h-8 pl-9 pr-3 bg-surface-container-lowest border border-outline-variant/50 rounded text-body-sm focus:border-primary focus:ring-0 transition-colors" placeholder="Search pipeline..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="text-on-surface-variant hover:bg-surface-container-high transition-colors p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container-high transition-colors p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant/30 ml-sm cursor-pointer">
+<img alt="User avatar with initials" class="w-full h-full object-cover" data-alt="A professional headshot of a corporate executive, clean bright lighting, light background, highly detailed photography, shallow depth of field, natural skin texture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAL6y8OphkW8WXlbmSjnEi6hy-HGryHXlDYAz1tDFFwOn9gytC3F6K0tLqIiRPOg-xfOcydMFykPxVLr2HEAdj1G8ktsqS20ukyG-seIrc1ZdCcB-KRdHgoz2KZtoFgIskokmUUI-9qaR41cHO5kGUL3pQtK2xFQFUshjHfdv00s6Ojkxzn0-ptsbCs85owXEJSuQNRB-ESEYjL0q14cpkSPNDXewrWwKiXLyc2-0-P3ALj0LZge62Lw"/>
+</div>
+</div>
+</header>
+<!-- Page Canvas -->
+<div class="flex-1 px-margin-desktop py-xl">
+<!-- Page Header -->
+<div class="mb-lg">
+<h1 class="font-display-lg text-display-lg text-on-surface mb-1">Pipeline Management</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Batch actions and stage transitions for Senior Product Designer role.</p>
+</div>
+<!-- Bulk Actions Toolbar -->
+<div class="flex items-center gap-md mb-lg bg-surface-container-lowest p-sm hairline-all rounded shadow-sm" style="box-shadow: 0 4px 6px -1px rgba(14, 29, 42, 0.05), 0 2px 4px -1px rgba(14, 29, 42, 0.03);">
+<!-- Selection Indicator -->
+<div class="flex items-center gap-sm px-sm hairline-r pr-md mr-sm">
+<input checked="" class="dense-checkbox border-outline-variant text-primary focus:ring-0" type="checkbox"/>
+<span class="font-body-sm text-body-sm font-medium text-on-surface">3 selected</span>
+</div>
+<!-- Action Buttons -->
+<button class="bg-primary text-on-primary font-body-sm text-body-sm font-medium px-4 h-8 rounded flex items-center gap-xs hover:bg-on-primary-fixed-variant transition-colors">
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                        Move to Stage
+                    </button>
+<button class="bg-surface-container-lowest text-on-surface font-body-sm text-body-sm px-4 h-8 rounded hairline-all flex items-center gap-xs hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[16px]">mail</span>
+                        Send Message
+                    </button>
+<button class="bg-surface-container-lowest text-on-surface font-body-sm text-body-sm px-4 h-8 rounded hairline-all flex items-center gap-xs hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[16px]">person_add</span>
+                        Add to Pool
+                    </button>
+<div class="flex-grow"></div>
+<button class="text-error font-body-sm text-body-sm px-4 h-8 rounded flex items-center gap-xs hover:bg-error-container/50 transition-colors">
+<span class="material-symbols-outlined text-[16px]">archive</span>
+                        Archive/Reject
+                    </button>
+</div>
+<!-- High Density Data Table -->
+<div class="bg-surface-container-lowest hairline-all rounded overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low hairline-b">
+<tr>
+<th class="py-2 px-md w-10 font-label-caps text-label-caps text-on-surface-variant"><input class="dense-checkbox border-outline-variant text-primary focus:ring-0" type="checkbox"/></th>
+<th class="py-2 px-md font-label-caps text-label-caps text-on-surface-variant">Candidate</th>
+<th class="py-2 px-md font-label-caps text-label-caps text-on-surface-variant">Current Stage</th>
+<th class="py-2 px-md font-label-caps text-label-caps text-on-surface-variant">Match Score</th>
+<th class="py-2 px-md font-label-caps text-label-caps text-on-surface-variant">Applied Date</th>
+<th class="py-2 px-md font-label-caps text-label-caps text-on-surface-variant w-1/3">AI Insight</th>
+</tr>
+</thead>
+<tbody>
+<!-- Row 1 (Selected, High Match) -->
+<tr class="table-row-hover hairline-b bg-surface-container/30 transition-colors h-9">
+<td class="px-md"><input checked="" class="dense-checkbox border-outline-variant text-primary focus:ring-0" type="checkbox"/></td>
+<td class="px-md">
+<div class="flex items-center gap-sm">
+<div class="w-5 h-5 rounded-full bg-surface-variant flex items-center justify-center text-[9px] font-bold text-on-surface-variant">EB</div>
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Elena Rostova</span>
+</div>
+</td>
+<td class="px-md">
+<span class="inline-flex items-center px-1.5 py-0.5 rounded-sm bg-surface-variant text-on-surface-variant font-label-caps text-[9px]">Technical Screen</span>
+</td>
+<td class="px-md">
+<div class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-[14px]">speed</span>
+<span class="font-data-mono text-data-mono">98%</span>
+</div>
+</td>
+<td class="px-md font-data-mono text-[11px] text-on-surface-variant">2023-10-24</td>
+<td class="px-md ai-brass-bg">
+<span class="font-body-sm text-[11px] ai-brass-text truncate block max-w-xs">Exceptional overlap in rapid prototyping tools.</span>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="table-row-hover hairline-b transition-colors h-9">
+<td class="px-md"><input class="dense-checkbox border-outline-variant text-primary focus:ring-0" type="checkbox"/></td>
+<td class="px-md">
+<div class="flex items-center gap-sm">
+<img class="w-5 h-5 rounded-full object-cover" data-alt="A small circular avatar portrait of a professional male designer with glasses, minimalist bright studio lighting, confident expression, shallow depth of field, high resolution." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTdPga-08LR2tSxftI1MNn1nOb7DawQru9rtWIHNTvwQcCIHwv6f9RXgLPvv8kJCM-RYiR1Zx9C3YOg1ZgOLkicy-fU1A22UngF_YgAFbX5dvRTinOLE2SJz0dQXKL-Cfv6uVfF99_BMV24doGxdo4VzyBvj0qVEf4AOMs4SxplbyABlLAQ9V7BkQFJ3BLvPRpxgvoqWhtcdBsCs4WnZaREvSxjseV808IKQ3xiiS6PwN--Qw_Z026YA"/>
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Marcus Chen</span>
+</div>
+</td>
+<td class="px-md">
+<span class="inline-flex items-center px-1.5 py-0.5 rounded-sm bg-surface-variant text-on-surface-variant font-label-caps text-[9px]">Portfolio Review</span>
+</td>
+<td class="px-md">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">speed</span>
+<span class="font-data-mono text-data-mono">82%</span>
+</div>
+</td>
+<td class="px-md font-data-mono text-[11px] text-on-surface-variant">2023-10-22</td>
+<td class="px-md">
+<span class="font-body-sm text-[11px] text-on-surface-variant truncate block max-w-xs">Strong visual design, slightly weak on UX research methodologies.</span>
+</td>
+</tr>
+<!-- Row 3 (Selected) -->
+<tr class="table-row-hover hairline-b bg-surface-container/30 transition-colors h-9">
+<td class="px-md"><input checked="" class="dense-checkbox border-outline-variant text-primary focus:ring-0" type="checkbox"/></td>
+<td class="px-md">
+<div class="flex items-center gap-sm">
+<div class="w-5 h-5 rounded-full bg-surface-variant flex items-center justify-center text-[9px] font-bold text-on-surface-variant">SJ</div>
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Sarah Jenkins</span>
+</div>
+</td>
+<td class="px-md">
+<span class="inline-flex items-center px-1.5 py-0.5 rounded-sm bg-surface-container-high text-on-surface font-label-caps text-[9px]">Initial Screen</span>
+</td>
+<td class="px-md">
+<div class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-[14px]">speed</span>
+<span class="font-data-mono text-data-mono">91%</span>
+</div>
+</td>
+<td class="px-md font-data-mono text-[11px] text-on-surface-variant">2023-10-25</td>
+<td class="px-md ai-brass-bg">
+<span class="font-body-sm text-[11px] ai-brass-text truncate block max-w-xs">Matches precise requirement for enterprise dashboard experience.</span>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="table-row-hover hairline-b transition-colors h-9">
+<td class="px-md"><input class="dense-checkbox border-outline-variant text-primary focus:ring-0" type="checkbox"/></td>
+<td class="px-md">
+<div class="flex items-center gap-sm">
+<img class="w-5 h-5 rounded-full object-cover" data-alt="A small circular avatar portrait of a young female professional, casual modern corporate attire, bright natural window lighting, clean white background, high detail." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJHS0Pk_yZ7St5Obj6bkPsCsThWxvdmXQpkfKdhC_oJVWLaYP6r3QRmQeRIEDhLYWz_qHEkM84ZQCdfDbLQqtIR244r97hvVTv0M5OdaZJ5JummqcAatCKMTIpK-dLFd-RwJTPexkP_99GT9mTF07CQNEpoctUtbdONCREGJQ3MSbyvKob_NLBnqe2aJ5Yo7XSaUODNHqnBFuOCX6io9tZFyPZEyY0no6TKEXe86MSWqSgcl2lWuFflw"/>
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Priya Patel</span>
+</div>
+</td>
+<td class="px-md">
+<span class="inline-flex items-center px-1.5 py-0.5 rounded-sm bg-surface-variant text-on-surface-variant font-label-caps text-[9px]">Technical Screen</span>
+</td>
+<td class="px-md">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">speed</span>
+<span class="font-data-mono text-data-mono">76%</span>
+</div>
+</td>
+<td class="px-md font-data-mono text-[11px] text-on-surface-variant">2023-10-20</td>
+<td class="px-md">
+<span class="font-body-sm text-[11px] text-on-surface-variant truncate block max-w-xs">Solid background, but lacks recent mobile-first project examples.</span>
+</td>
+</tr>
+<!-- Row 5 (Selected) -->
+<tr class="table-row-hover transition-colors h-9 bg-surface-container/30">
+<td class="px-md"><input checked="" class="dense-checkbox border-outline-variant text-primary focus:ring-0" type="checkbox"/></td>
+<td class="px-md">
+<div class="flex items-center gap-sm">
+<div class="w-5 h-5 rounded-full bg-surface-variant flex items-center justify-center text-[9px] font-bold text-on-surface-variant">DW</div>
+<span class="font-body-sm text-body-sm font-medium text-on-surface">David Wu</span>
+</div>
+</td>
+<td class="px-md">
+<span class="inline-flex items-center px-1.5 py-0.5 rounded-sm bg-surface-variant text-on-surface-variant font-label-caps text-[9px]">Final Interview</span>
+</td>
+<td class="px-md">
+<div class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-[14px]">speed</span>
+<span class="font-data-mono text-data-mono">89%</span>
+</div>
+</td>
+<td class="px-md font-data-mono text-[11px] text-on-surface-variant">2023-10-15</td>
+<td class="px-md ai-brass-bg">
+<span class="font-body-sm text-[11px] ai-brass-text truncate block max-w-xs">Strong leadership indicators detected in communication style.</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination / Footer simple -->
+<div class="flex justify-between items-center mt-sm text-on-surface-variant font-body-sm text-[11px]">
+<span>Showing 1-5 of 24 candidates</span>
+<div class="flex gap-2">
+<button class="hover:text-primary transition-colors disabled:opacity-50 text-[11px]">Previous</button>
+<span class="font-data-mono">1 / 5</span>
+<button class="hover:text-primary transition-colors text-[11px]">Next</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Mobile View Warning (Per instructions, focusing on desktop high-density, basic mobile shell provided) -->
+<div class="md:hidden flex flex-col min-h-screen w-full items-center justify-center p-xl text-center">
+<span class="material-symbols-outlined text-display-lg text-primary mb-md">desktop_windows</span>
+<h2 class="font-display-md text-display-md text-on-surface mb-sm">Desktop Experience</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">This high-density pipeline management interface requires a larger screen. Please view on a desktop or tablet device.</p>
+</div>
+</body></html>

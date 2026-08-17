@@ -1,0 +1,16 @@
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+pydantic==2.9.2
+httpx==0.27.2
+python-multipart==0.0.9
+pypdf==4.3.1
+python-docx==1.1.2
+qdrant-client==1.11.1
+python-dotenv==1.0.1
+
+# Optional OCR extras for scanned-PDF resumes (app/parsing/ocr.py) — uncomment if needed.
+# Also requires a system Tesseract install (apt-get install tesseract-ocr poppler-utils).
+# pytesseract==0.3.13
+# pdf2image==1.17.0
+# Pillow==10.4.0
+
