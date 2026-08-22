@@ -30,7 +30,7 @@ export default function LoginForm() {
       <div className="bg-surface-variant text-on-surface-variant p-md rounded-md text-body-sm text-center mb-sm">
         <strong>Demo credentials pre-filled!</strong>
         <br />
-        Just click "Sign in" below.
+        Just click &ldquo;Sign in&rdquo; below.
       </div>
       <Input label="Email" type="email" leftIcon="mail" error={errors.email?.message} {...register("email")} />
       <Input

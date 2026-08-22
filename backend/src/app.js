@@ -19,6 +19,8 @@ import messagingRoutes from "./routes/messaging.routes.js";
 import copilotRoutes from "./routes/copilot.routes.js";
 import analyticsRoutes from "./routes/analytics.routes.js";
 import adminRoutes from "./routes/admin.routes.js";
+import candidateRoutes from "./routes/candidate/index.js";
+import adminPanelRoutes from "./routes/admin-panel/index.js";
 
 export function createApp() {
   const app = express();
@@ -62,6 +64,8 @@ export function createApp() {
   app.use("/api/copilot", copilotRoutes);
   app.use("/api/analytics", analyticsRoutes);
   app.use("/api/admin", adminRoutes);
+  app.use("/api/candidate", candidateRoutes); // candidate portal (auth, profile, resumes, jobs, applications)
+  app.use("/api/admin-panel", adminPanelRoutes); // super-admin panel (platform-wide, requireSuperAdmin)
 
   app.use(notFoundHandler);
   app.use(errorHandler);

@@ -12,6 +12,15 @@ const jobSchema = new mongoose.Schema(
     experienceMax: Number,
     location: String,
     employmentType: { type: String, enum: ["full_time", "contract", "remote"], default: "full_time" },
+    // Candidate-portal discovery fields (docs/13 §5.1). workMode is distinct from
+    // employmentType; salaryRange.visible gates whether pay shows to candidates.
+    workMode: { type: String, enum: ["onsite", "hybrid", "remote"] },
+    experienceLevel: { type: String, enum: ["entry", "mid", "senior", "lead"] },
+    salaryRange: { min: Number, max: Number, currency: String, visible: { type: Boolean, default: false } },
+    // Only isPublic + status:"open" jobs are visible in the candidate portal; publishedAt drives
+    // "date posted" sorting/filtering.
+    isPublic: { type: Boolean, default: false },
+    publishedAt: Date,
     status: { type: String, enum: ["draft", "open", "on_hold", "closed"], default: "draft" },
     jdEmbeddingRef: String,
     scoringWeights: {

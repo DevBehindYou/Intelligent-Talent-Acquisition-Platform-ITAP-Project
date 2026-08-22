@@ -43,8 +43,10 @@ describe("matchingService.scoreCandidateForJob", () => {
       education: [],
     };
 
-    const strongScore = await matchingService.scoreCandidateForJob(strongCandidate, job);
-    const weakScore = await matchingService.scoreCandidateForJob(weakCandidate, job);
+    // useLlmExplanation:false keeps this a pure, deterministic scoring test with no network
+    // call to the AI service (which would otherwise make the test flaky/slow off-grid).
+    const strongScore = await matchingService.scoreCandidateForJob(strongCandidate, job, { useLlmExplanation: false });
+    const weakScore = await matchingService.scoreCandidateForJob(weakCandidate, job, { useLlmExplanation: false });
 
     expect(strongScore.overallScore).toBeGreaterThan(weakScore.overallScore);
     expect(strongScore.overallScore).toBeGreaterThanOrEqual(0);
@@ -64,7 +66,7 @@ describe("matchingService.scoreCandidateForJob", () => {
     };
     const candidate = { _id: "c1", fullName: "No K8s", skills: [], totalExperienceYears: 5, education: [] };
 
-    const score = await matchingService.scoreCandidateForJob(candidate, job);
+    const score = await matchingService.scoreCandidateForJob(candidate, job, { useLlmExplanation: false });
     expect(score.overallScore).toBeLessThanOrEqual(55);
     expect(score.reasonTags).toContain("missing-must-have-skill");
   });

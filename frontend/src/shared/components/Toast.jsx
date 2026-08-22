@@ -23,7 +23,7 @@ function ToastItem({ toast }) {
       role="status"
       aria-live="polite"
       onMouseEnter={(e) => e.currentTarget.dataset.paused === "true"}
-      className={`flex items-start gap-sm bg-paper border rounded-lg shadow-md px-md py-sm min-w-[280px] max-w-sm ${TONE_CLASSES[toast.tone]}`}
+      className={`flex items-start gap-sm bg-paper border rounded-lg shadow-md px-md py-sm w-full sm:w-auto sm:min-w-[280px] sm:max-w-sm ${TONE_CLASSES[toast.tone]}`}
     >
       <Icon name={TONE_ICON[toast.tone]} size={20} />
       <div className="flex-1">
@@ -44,7 +44,7 @@ function ToastItem({ toast }) {
 export default function ToastContainer() {
   const toasts = useNotificationsStore((s) => s.toasts);
   return (
-    <div className="fixed bottom-md right-md z-[100] flex flex-col gap-sm">
+    <div className="fixed bottom-md right-md left-md sm:left-auto z-[100] flex flex-col gap-sm sm:items-end">
       {toasts.map((toast) => (
         <ToastItem key={toast.id} toast={toast} />
       ))}

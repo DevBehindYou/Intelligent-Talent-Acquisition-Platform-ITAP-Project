@@ -69,8 +69,8 @@ export default function Topbar() {
           {menuOpen && (
             <div className="absolute right-0 mt-2 w-48 bg-paper border border-outline-variant/40 rounded-lg shadow-md py-1 z-20">
               <div className="px-md py-sm hairline-b">
-                <p className="text-body-md text-on-surface font-medium">{user?.fullName}</p>
-                <p className="text-body-sm text-on-surface-variant">{user?.email}</p>
+                <p className="text-body-md text-on-surface font-medium truncate">{user?.fullName}</p>
+                <p className="text-body-sm text-on-surface-variant truncate">{user?.email}</p>
               </div>
               <button
                 onClick={() => navigate("/settings/profile")}

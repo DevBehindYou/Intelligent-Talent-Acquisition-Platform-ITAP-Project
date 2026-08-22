@@ -1,6 +1,7 @@
 import { verifySupabaseAccessToken, refreshSupabaseSession } from "../config/supabase.js";
 import { authService } from "../services/authService.js";
 import { issueSessionCookie, issueRefreshCookie, clearAuthCookies } from "../utils/sessionCookies.js";
+import { revokeCurrentSession } from "../utils/sessionRevocation.js";
 import { ApiError } from "../middleware/errorHandler.js";
 import { User } from "../models/User.js";
 
@@ -19,7 +20,7 @@ export const authController = {
     user.lastLoginAt = new Date();
     await user.save();
 
-    issueSessionCookie(res, { userId: user._id, organizationId: user.organizationId, role: user.role });
+    issueSessionCookie(res, { userType: "staff", userId: user._id, organizationId: user.organizationId, role: user.role });
     if (refreshToken) issueRefreshCookie(res, refreshToken);
 
     res.json({ success: true, data: { user: authService.toPublicUser(user) } });
@@ -41,11 +42,12 @@ export const authController = {
       inviteToken,
     });
 
-    issueSessionCookie(res, { userId: user._id, organizationId: user.organizationId, role: user.role });
+    issueSessionCookie(res, { userType: "staff", userId: user._id, organizationId: user.organizationId, role: user.role });
     res.status(201).json({ success: true, data: { user: authService.toPublicUser(user) } });
   },
 
   async logout(req, res) {
+    await revokeCurrentSession(req); // denylist this token + drop sockets, server-side
     clearAuthCookies(res);
     res.json({ success: true, data: {} });
   },
@@ -77,7 +79,7 @@ export const authController = {
     }
 
     const user = await authService.getMongoUser(decoded.sub);
-    issueSessionCookie(res, { userId: user._id, organizationId: user.organizationId, role: user.role });
+    issueSessionCookie(res, { userType: "staff", userId: user._id, organizationId: user.organizationId, role: user.role });
     // Supabase rotates refresh tokens on each use — persist the new one so the next refresh works.
     if (refreshed.refresh_token) issueRefreshCookie(res, refreshed.refresh_token);
 

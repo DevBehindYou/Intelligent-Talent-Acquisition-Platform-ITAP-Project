@@ -47,7 +47,7 @@ export default function JobForm() {
 
   return (
     <form className="flex flex-col gap-lg max-w-2xl">
-      <div className="grid grid-cols-2 gap-md">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-md">
         <Input label="Job title" value={form.title} onChange={(e) => update("title", e.target.value)} required />
         <Input label="Department" value={form.department} onChange={(e) => update("department", e.target.value)} />
       </div>
@@ -72,7 +72,7 @@ export default function JobForm() {
         onChange={(skills) => update("niceToHaveSkills", skills)}
       />
 
-      <div className="grid grid-cols-3 gap-md">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-md">
         <Input
           label="Min. experience (yrs)"
           type="number"

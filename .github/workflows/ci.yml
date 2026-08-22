@@ -45,6 +45,14 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm test
+      # Cache the mongodb-memory-server binary so the DB integration tests don't re-download
+      # the (large) mongod binary on every run.
+      - name: Cache mongodb-memory-server binary
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/mongodb-binaries
+          key: mongodb-binaries-${{ runner.os }}
+      - run: npm run test:integration
 
   ai-service:
     name: AI service — import smoke test
